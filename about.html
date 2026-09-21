@@ -3,82 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us - 8.8 Events</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <title>About Us – 8.8 Events Management</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <style>
+        .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; margin-bottom: 6rem; }
+        .about-grid.reverse { direction: rtl; }
+        .about-grid.reverse > * { direction: ltr; }
+        .about-img { width: 100%; border-radius: var(--radius); display: block; position: relative; }
+        .img-frame { position: relative; }
+        .img-frame::after { content: ''; position: absolute; top: -15px; left: -15px; right: 15px; bottom: 15px; border: 1px solid var(--gold-border); border-radius: var(--radius); z-index: -1; }
+        .values-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px,1fr)); gap: 1.5rem; margin-top: 3rem; }
+        .value-card { background: var(--dark-card); border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radius); padding: 2rem; transition: var(--transition); }
+        .value-card:hover { border-color: var(--gold-border); transform: translateY(-4px); }
+        .value-icon { font-size: 2rem; margin-bottom: 1rem; display: block; }
+        .value-card h3 { font-family: var(--font-heading); font-size: 1.2rem; margin-bottom: 0.5rem; }
+        .value-card p { font-size: 0.875rem; color: var(--white-70); font-weight: 300; }
+        .slide-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-top: 3rem; }
+        @media (max-width: 900px) { .about-grid { grid-template-columns: 1fr; } .about-grid.reverse { direction: ltr; } .slide-grid { grid-template-columns: 1fr; } }
+    </style>
 </head>
 <body>
-
-    <!-- Navbar -->
-    <nav class="navbar">
-        <a href="index.html" class="nav-brand"><img src="images/logo1.jpg" alt="8.8 Events" style="height: 65px; display: block;"></a>
-        <div class="nav-links">
-            <a href="search.html">Find Vendors</a>
-            <a href="categories.html">Categories</a>
-            <a href="how-it-works.html">How it Works</a>
-            <a href="register.html" class="btn btn-primary" style="color:white;">Join as Vendor</a>
-        </div>
+    <nav class="navbar" id="navbar">
+        <a href="index.html" class="nav-logo"><img src="images/logo1.jpg" alt="8.8 Events"></a>
+        <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="search.html">Find Vendors</a></li>
+            <li><a href="categories.html">Categories</a></li>
+            <li><a href="how-it-works.html">How it Works</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="client-register.html">Sign Up</a></li>
+            <li><a href="register.html" class="nav-cta">Join as Vendor</a></li>
+        </ul>
     </nav>
 
-    <!-- Main Content -->
-    <main class="container" style="padding-top: 3rem; padding-bottom: 5rem; max-width: 800px;">
-        <h1 class="section-title" style="text-align: left; margin-bottom: 1rem;">About 8.8 Events</h1>
-        <p style="font-size: 1.1rem; margin-bottom: 2rem;">We are building trust in the Nigerian event industry.</p>
-        
-        <div style="background: white; padding: 3rem; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
-            <h2 style="margin-bottom: 1rem;">Our Mission</h2>
-            <p style="margin-bottom: 2rem;">Our mission is to eliminate the stress, fraud, and unreliability often associated with event planning. We empower customers to discover, compare, and book verified event vendors with confidence, while providing professional vendors a platform to grow their businesses securely.</p>
-            
-            <h2 style="margin-bottom: 1rem;">The Problem We Solve</h2>
-            <p style="margin-bottom: 2rem;">People planning events in Nigeria often struggle to find reliable vendors, compare prices, confirm quality, and pay with confidence. Vendors also struggle to build trust beyond social media. The result is a high-stress planning experience. We fix this by introducing a hybrid marketplace with structured booking records, verified vendors, and protected payments.</p>
+    <div class="page-hero">
+        <div class="container">
+            <span class="page-hero-label">Our Story</span>
+            <h1>Building <em style="color:var(--gold);font-style:italic;">Trust</em> in Nigerian Event Planning</h1>
+            <p>We are eliminating the stress, fraud, and unreliability often associated with event planning in Nigeria — one verified booking at a time.</p>
+        </div>
+    </div>
 
-            <h2 style="margin-bottom: 1rem;">Why "Hybrid"?</h2>
-            <p>We combine the convenience of self-service online booking with the reassurance of human support. Our Admin team monitors the marketplace, verifies vendors, assists with dispute handling, and supports customers who need help matching with the right professionals.</p>
+    <section class="section">
+        <div class="container">
+            <div class="about-grid">
+                <div class="reveal">
+                    <span class="section-label">Our Mission</span>
+                    <h2 class="section-title">A Platform Built on <em style="color:var(--gold);font-style:italic;">Confidence</em></h2>
+                    <p class="section-sub">Our mission is to eliminate the stress, fraud, and unreliability often associated with event planning. We empower customers to discover, compare, and book verified event vendors with confidence.</p>
+                    <a href="search.html" class="btn-gold">Explore Vendors</a>
+                </div>
+                <div class="img-frame reveal">
+                    <img class="about-img" src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=800&q=80" alt="Event planning">
+                </div>
+            </div>
 
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-top: 3rem;">
-                <img src="images/slide1.jpg" alt="Our Approach" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
-                <img src="images/slide2.jpg" alt="Our Team" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);">
+            <div class="about-grid reverse">
+                <div class="img-frame reveal">
+                    <img class="about-img" src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=800&q=80" alt="Events">
+                </div>
+                <div class="reveal">
+                    <span class="section-label">The Problem We Solve</span>
+                    <h2 class="section-title">Why <em style="color:var(--gold);font-style:italic;">8.8 Events</em> Exists</h2>
+                    <p class="section-sub">People planning events in Nigeria often struggle to find reliable vendors, confirm quality, and pay with confidence. Vendors struggle to build trust beyond social media. We fix this with a hybrid marketplace — structured booking records, verified vendors, and protected payments.</p>
+                    <a href="how-it-works.html" class="btn-outline">How it Works</a>
+                </div>
+            </div>
+
+            <div style="text-align:center; margin-bottom: 2rem;" class="reveal">
+                <span class="section-label">Our Philosophy</span>
+                <h2 class="section-title">Why <em style="color:var(--gold);font-style:italic;">"Hybrid"?</em></h2>
+                <p style="color:var(--white-70); font-weight:300; max-width:600px; margin:0 auto 2rem;">We combine self-service online booking with the reassurance of human support. Our admin team monitors the marketplace, verifies vendors, and helps with disputes.</p>
+            </div>
+            <div class="slide-grid">
+                <img src="images/slide1.jpg" alt="Our approach" style="width:100%;border-radius:var(--radius);" class="reveal">
+                <img src="images/slide2.jpg" alt="Our team" style="width:100%;border-radius:var(--radius);" class="reveal">
             </div>
         </div>
-    </main>
+    </section>
 
-    <!-- Footer -->
+    <section class="section section-alt">
+        <div class="container">
+            <div style="text-align:center;" class="reveal">
+                <span class="section-label">Our Values</span>
+                <h2 class="section-title">What We Stand For</h2>
+            </div>
+            <div class="values-grid">
+                <div class="value-card reveal"><span class="value-icon">🔐</span><h3>Trust & Verification</h3><p>Every vendor is screened before listing. We protect both parties with structured booking records.</p></div>
+                <div class="value-card reveal"><span class="value-icon">💳</span><h3>Secure Payments</h3><p>Payments are held securely and released only upon successful event delivery.</p></div>
+                <div class="value-card reveal"><span class="value-icon">🤝</span><h3>Human Support</h3><p>Our admin team is always available to mediate disputes and assist with matching.</p></div>
+                <div class="value-card reveal"><span class="value-icon">🌍</span><h3>Nationwide Reach</h3><p>We cover all 36 states across Nigeria, from Lagos to Maiduguri.</p></div>
+            </div>
+        </div>
+    </section>
+
     <footer class="footer">
-        <div class="footer-content">
-            <div>
-                <a href="index.html" class="nav-brand"><img src="images/logo1.jpg" alt="8.8 Events" style="height: 65px; display: block;"></a>
-                <p style="margin-top: 1rem; color: rgba(255,255,255,0.7);">The trusted platform for event planning in Nigeria.</p>
-            </div>
-            <div>
-                <h4>Explore</h4>
-                <ul>
-                    <li><a href="search.html">Find Vendors</a></li>
-                    <li><a href="categories.html">Categories</a></li>
-                    <li><a href="how-it-works.html">How it Works</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4>Vendors</h4>
-                <ul>
-                    <li><a href="register.html">Join 8.8 Events</a></li>
-                    <li><a href="vendor-pricing.html">Pricing & Plans</a></li>
-                    <li><a href="faq.html">Vendor FAQ</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4>Support</h4>
-                <ul>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="contact.html">Contact Support</a></li>
-                    <li><a href="legal/terms.html">Terms of Service</a></li>
-                    <li><a href="legal/privacy.html">Privacy Policy</a></li>
-                </ul>
-            </div>
+        <div class="footer-grid">
+            <div class="footer-brand"><img src="images/logo1.jpg" alt="8.8 Events"><p>Nigeria's hybrid event marketplace — connecting clients with verified professionals.</p></div>
+            <div class="footer-col"><h4>Explore</h4><ul><li><a href="search.html">Find Vendors</a></li><li><a href="categories.html">Categories</a></li><li><a href="how-it-works.html">How it Works</a></li></ul></div>
+            <div class="footer-col"><h4>Vendors</h4><ul><li><a href="register.html">Join 8.8 Events</a></li><li><a href="vendor-pricing.html">Pricing & Plans</a></li><li><a href="faq.html">FAQ</a></li></ul></div>
+            <div class="footer-col"><h4>Support</h4><ul><li><a href="about.html">About Us</a></li><li><a href="contact.html">Contact</a></li><li><a href="legal/terms.html">Terms</a></li><li><a href="legal/privacy.html">Privacy</a></li></ul></div>
         </div>
-        <div class="footer-bottom">
-            &copy; 2026 8.8 Events. All rights reserved.
-        </div>
+        <div class="footer-bottom"><span>&copy; 2026 8.8 Events Management. All rights reserved.</span><span>Lagos · Abuja · Rivers · Kano</span></div>
     </footer>
 
+    <script>
+        const nb = document.getElementById('navbar');
+        window.addEventListener('scroll', () => nb.classList.toggle('scrolled', window.scrollY > 60));
+        document.getElementById('hamburger').addEventListener('click', () => document.getElementById('navLinks').classList.toggle('open'));
+        document.querySelectorAll('.reveal').forEach(el => new IntersectionObserver(([e]) => { if(e.isIntersecting){e.target.classList.add('visible');}},{threshold:0.1}).observe(el));
+    </script>
 </body>
 </html>

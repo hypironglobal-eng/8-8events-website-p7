@@ -3,333 +3,999 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>8.8 Events - Hybrid Event Marketplace</title>
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+    <title>8.8 Events Management – Nigeria's Premier Event Marketplace</title>
+    <meta name="description" content="Discover, compare, and book verified event vendors across Nigeria. Weddings, corporate events, birthdays & more.">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        /* Homepage specific styles */
+        :root {
+            --gold: #C9A84C;
+            --gold-light: #E8C97A;
+            --gold-dim: rgba(201, 168, 76, 0.15);
+            --dark: #080C12;
+            --dark-2: #0F1520;
+            --dark-3: #161E2E;
+            --dark-card: #111827;
+            --white: #FFFFFF;
+            --white-70: rgba(255,255,255,0.7);
+            --white-40: rgba(255,255,255,0.4);
+            --white-10: rgba(255,255,255,0.08);
+            --font-heading: 'Cormorant Garamond', serif;
+            --font-body: 'Inter', sans-serif;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            background: var(--dark);
+            color: var(--white);
+            font-family: var(--font-body);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* ==============================
+           NAVBAR
+        ============================== */
+        .navbar {
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1.5rem 4rem;
+            transition: background 0.4s ease, padding 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .navbar.scrolled {
+            background: rgba(8, 12, 18, 0.96);
+            backdrop-filter: blur(20px);
+            padding: 0.9rem 4rem;
+            box-shadow: 0 2px 40px rgba(0,0,0,0.5);
+            border-bottom: 1px solid rgba(201, 168, 76, 0.15);
+        }
+
+        .nav-logo img { height: 55px; display: block; }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--white-70);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--gold); }
+
+        .nav-cta {
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            color: var(--dark) !important;
+            padding: 0.6rem 1.5rem !important;
+            border-radius: 4px;
+            font-weight: 600 !important;
+        }
+
+        .nav-cta:hover { opacity: 0.9; transform: translateY(-1px); }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            background: none;
+            border: none;
+        }
+        .hamburger span {
+            display: block; width: 24px; height: 2px;
+            background: var(--white); border-radius: 2px;
+            transition: all 0.3s;
+        }
+
+        /* ==============================
+           HERO SLIDER
+        ============================== */
         .hero {
             position: relative;
-            min-height: calc(100vh - var(--nav-height));
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .slider {
+            display: flex;
+            height: 100%;
+            transition: transform 0.9s cubic-bezier(0.77, 0, 0.175, 1);
+            will-change: transform;
+        }
+
+        .slide {
+            min-width: 100%;
+            height: 100%;
+            position: relative;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 2rem;
-            background-image: linear-gradient(rgba(26, 26, 46, 0.8), rgba(26, 26, 46, 0.8)), url('https://images.unsplash.com/photo-1519167758481-83f550bb49b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+        }
+
+        .slide-bg {
+            position: absolute;
+            inset: 0;
             background-size: cover;
             background-position: center;
-            background-attachment: fixed;
-            color: white;
-            text-align: center;
-            overflow: hidden;
-            margin-top: -var(--nav-height); /* Pull up under transparent nav if we want, or just let it sit below */
-            padding-top: calc(var(--nav-height) + 2rem);
+            transform: scale(1.08);
+            transition: transform 8s ease;
         }
 
-        .hero-content {
+        .slide.active .slide-bg { transform: scale(1); }
+
+        .slide-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to bottom,
+                rgba(8,12,18,0.35) 0%,
+                rgba(8,12,18,0.55) 50%,
+                rgba(8,12,18,0.85) 100%
+            );
+        }
+
+        .slide-content {
             position: relative;
             z-index: 2;
-            max-width: 800px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            padding-bottom: 80px;
+            text-align: center;
+            max-width: 900px;
+            padding: 0 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.8s ease 0.3s, transform 0.8s ease 0.3s;
         }
 
-        .badge {
+        .slide.active .slide-content {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .slide-eyebrow {
             display: inline-block;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(4px);
-            padding: 0.5rem 1rem;
-            border-radius: 50px;
-            font-size: 0.875rem;
+            font-size: 0.75rem;
             font-weight: 600;
-            letter-spacing: 1px;
+            letter-spacing: 3px;
             text-transform: uppercase;
-            margin-bottom: 1.5rem;
-            color: white;
-        }
-
-        .hero h1 {
-            font-size: clamp(2.5rem, 5vw, 4.5rem);
-            line-height: 1.2;
+            color: var(--gold);
+            border: 1px solid var(--gold-dim);
+            padding: 0.4rem 1.2rem;
+            border-radius: 2px;
             margin-bottom: 1.5rem;
         }
 
-        .hero h1 .highlight {
-            color: var(--accent);
+        .slide-content h1 {
+            font-family: var(--font-heading);
+            font-size: clamp(3rem, 6vw, 6rem);
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            color: var(--white);
         }
 
-        .hero p {
-            font-size: clamp(1rem, 2vw, 1.25rem);
-            color: rgba(255, 255, 255, 0.85);
-            margin-bottom: 2.5rem;
+        .slide-content h1 em {
+            font-style: italic;
+            color: var(--gold);
+        }
+
+        .slide-content p {
+            font-size: clamp(1rem, 1.5vw, 1.2rem);
+            color: var(--white-70);
             max-width: 600px;
+            margin: 0 auto 2.5rem;
+            font-weight: 300;
         }
 
-        .button-group {
+        .hero-buttons {
             display: flex;
             gap: 1rem;
             justify-content: center;
             flex-wrap: wrap;
         }
 
-        .btn-hero-secondary {
-            background-color: transparent;
-            color: white;
-            border: 2px solid white;
+        .btn-gold {
+            background: linear-gradient(135deg, var(--gold), var(--gold-light));
+            color: var(--dark);
+            padding: 1rem 2.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            transition: all 0.3s;
+            display: inline-block;
         }
 
-        .btn-hero-secondary:hover {
-            background-color: rgba(255, 255, 255, 0.1);
-            transform: translateY(-2px);
+        .btn-gold:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(201,168,76,0.3); }
+
+        .btn-outline {
+            background: transparent;
+            color: var(--white);
+            padding: 1rem 2.5rem;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            border: 1px solid rgba(255,255,255,0.4);
+            transition: all 0.3s;
+            display: inline-block;
         }
 
-        .floating-card-wrapper {
+        .btn-outline:hover { border-color: var(--gold); color: var(--gold); transform: translateY(-3px); }
+
+        /* Slider Controls */
+        .slider-dots {
             position: absolute;
-            bottom: -50px;
+            bottom: 2.5rem;
             left: 50%;
             transform: translateX(-50%);
-            width: 100%;
             display: flex;
-            justify-content: center;
+            gap: 0.75rem;
             z-index: 10;
         }
 
-        .floating-card {
-            background: white;
-            color: var(--primary);
-            border-radius: 12px;
-            padding: 2rem;
+        .dot {
+            width: 8px; height: 8px;
+            border-radius: 50%;
+            background: var(--white-40);
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            padding: 0;
+        }
+
+        .dot.active { background: var(--gold); width: 28px; border-radius: 4px; }
+
+        .slider-arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
+            color: white;
+            width: 50px; height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.2rem;
             display: flex;
-            gap: 3rem;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-            border: 1px solid rgba(0, 0, 0, 0.05);
-            width: 90%;
-            max-width: 800px;
-            justify-content: space-around;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            backdrop-filter: blur(10px);
+        }
+
+        .slider-arrow:hover { background: var(--gold-dim); border-color: var(--gold); color: var(--gold); }
+        .slider-arrow.prev { left: 2rem; }
+        .slider-arrow.next { right: 2rem; }
+
+        /* Stats bar */
+        .stats-bar {
+            position: absolute;
+            bottom: 0;
+            left: 0; right: 0;
+            z-index: 10;
+            display: flex;
+            justify-content: center;
+        }
+
+        .stats-inner {
+            background: rgba(15, 21, 32, 0.9);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid rgba(201,168,76,0.2);
+            display: flex;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .stat-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            flex: 1;
+            padding: 1.5rem 2rem;
             text-align: center;
+            border-right: 1px solid rgba(255,255,255,0.06);
         }
 
-        .stat-value {
+        .stat-item:last-child { border-right: none; }
+
+        .stat-number {
             font-family: var(--font-heading);
-            font-size: 2.5rem;
+            font-size: 2.2rem;
             font-weight: 700;
-            color: var(--primary);
+            color: var(--gold);
             line-height: 1;
-            margin-bottom: 0.5rem;
-        }
-
-        .stat-value span {
-            color: var(--secondary);
-            font-size: 1.5rem;
-            vertical-align: super;
         }
 
         .stat-label {
-            font-size: 0.875rem;
-            color: var(--text-secondary);
-            font-weight: 600;
+            font-size: 0.75rem;
+            color: var(--white-40);
             text-transform: uppercase;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
+            margin-top: 0.3rem;
         }
 
-        /* Categories */
-        .category-grid {
+        /* ==============================
+           SECTIONS COMMON
+        ============================== */
+        .section {
+            padding: 7rem 4rem;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; }
+
+        .section-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--gold);
+            display: block;
+            margin-bottom: 1rem;
+        }
+
+        .section-title {
+            font-family: var(--font-heading);
+            font-size: clamp(2rem, 4vw, 3.5rem);
+            font-weight: 700;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-subtitle {
+            color: var(--white-70);
+            font-size: 1.05rem;
+            max-width: 550px;
+            font-weight: 300;
+        }
+
+        /* ==============================
+           CATEGORIES
+        ============================== */
+        .categories-section {
+            background: var(--dark-2);
+            padding: 7rem 4rem;
+        }
+
+        .categories-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 3rem;
+        }
+
+        .categories-header a {
+            color: var(--gold);
+            text-decoration: none;
+            font-size: 0.875rem;
+            font-weight: 500;
+            border-bottom: 1px solid var(--gold-dim);
+            padding-bottom: 2px;
+            transition: border-color 0.3s;
+        }
+
+        .categories-header a:hover { border-color: var(--gold); }
+
+        .cat-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-top: 5rem;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 1.5rem;
         }
 
-        .category-card {
-            background: white;
-            border-radius: 12px;
-            padding: 2rem;
-            text-align: center;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            transition: transform 0.3s ease;
+        .cat-card {
+            background: var(--dark-card);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: 8px;
+            padding: 2rem 1.5rem;
+            text-decoration: none;
+            color: var(--white);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
         }
 
-        .category-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        .cat-card::before {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--gold), var(--gold-light));
+            transform: scaleX(0);
+            transition: transform 0.3s;
         }
 
-        /* How it works */
-        .steps-container {
+        .cat-card:hover { border-color: rgba(201,168,76,0.3); transform: translateY(-4px); }
+        .cat-card:hover::before { transform: scaleX(1); }
+
+        .cat-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .cat-card h3 {
+            font-family: var(--font-heading);
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .cat-card p {
+            font-size: 0.85rem;
+            color: var(--white-40);
+            line-height: 1.5;
+        }
+
+        /* ==============================
+           HOW IT WORKS
+        ============================== */
+        .how-section {
+            background: var(--dark);
+            padding: 7rem 4rem;
+        }
+
+        .how-layout {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 3rem;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+            margin-top: 4rem;
         }
-        
-        .step {
-            text-align: center;
+
+        .how-image {
+            position: relative;
         }
-        
-        .step-number {
-            width: 60px;
-            height: 60px;
-            background: var(--secondary);
-            color: white;
+
+        .how-image img {
+            width: 100%;
+            border-radius: 8px;
+            display: block;
+        }
+
+        .how-image-accent {
+            position: absolute;
+            top: -20px; right: -20px;
+            width: 60%; height: 60%;
+            border: 1px solid rgba(201,168,76,0.3);
+            border-radius: 8px;
+            z-index: -1;
+        }
+
+        .how-steps { display: flex; flex-direction: column; gap: 2.5rem; }
+
+        .how-step {
+            display: flex;
+            gap: 1.5rem;
+            align-items: flex-start;
+            padding-bottom: 2.5rem;
+            border-bottom: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .how-step:last-child { border-bottom: none; padding-bottom: 0; }
+
+        .step-num {
+            font-family: var(--font-heading);
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--gold-dim);
+            line-height: 1;
+            min-width: 50px;
+            border: 1px solid var(--gold-dim);
+            width: 56px; height: 56px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin: 0 auto 1.5rem;
+            font-size: 1.3rem;
+            color: var(--gold);
+            flex-shrink: 0;
+        }
+
+        .how-step h3 {
             font-family: var(--font-heading);
+            font-size: 1.3rem;
+            margin-bottom: 0.4rem;
+        }
+
+        .how-step p { font-size: 0.9rem; color: var(--white-70); font-weight: 300; }
+
+        /* ==============================
+           TESTIMONIALS / PROMO SLIDES
+        ============================== */
+        .promo-section {
+            background: var(--dark-3);
+            padding: 7rem 4rem;
+            overflow: hidden;
+        }
+
+        .promo-track-wrapper {
+            overflow: hidden;
+            margin-top: 3rem;
+        }
+
+        .promo-track {
+            display: flex;
+            gap: 2rem;
+            animation: scrollTrack 25s linear infinite;
+        }
+
+        .promo-track:hover { animation-play-state: paused; }
+
+        @keyframes scrollTrack {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .promo-card {
+            min-width: 380px;
+            border-radius: 8px;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .promo-card img {
+            width: 100%;
+            height: 280px;
+            object-fit: cover;
+            display: block;
+            border-radius: 8px;
+        }
+
+        /* ==============================
+           CTA SECTION
+        ============================== */
+        .cta-section {
+            background: linear-gradient(135deg, var(--dark-2) 0%, var(--dark-3) 100%);
+            border-top: 1px solid rgba(201,168,76,0.15);
+            border-bottom: 1px solid rgba(201,168,76,0.15);
+            padding: 7rem 4rem;
+            text-align: center;
+        }
+
+        .cta-section .section-title { margin-left: auto; margin-right: auto; }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 2.5rem;
+        }
+
+        /* ==============================
+           FOOTER
+        ============================== */
+        .footer {
+            background: var(--dark-2);
+            border-top: 1px solid rgba(255,255,255,0.06);
+            padding: 5rem 4rem 2rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-brand img { height: 55px; display: block; margin-bottom: 1.5rem; }
+
+        .footer-brand p { color: var(--white-40); font-size: 0.9rem; font-weight: 300; line-height: 1.7; }
+
+        .footer-col h4 {
+            font-size: 0.75rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold);
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-col ul { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; }
+
+        .footer-col ul li a {
+            color: var(--white-40);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .footer-col ul li a:hover { color: var(--white); }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.06);
+            padding-top: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--white-40);
+            font-size: 0.85rem;
+        }
+
+        /* ==============================
+           SCROLL REVEAL
+        ============================== */
+        .reveal {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* ==============================
+           RESPONSIVE
+        ============================== */
+        @media (max-width: 1024px) {
+            .how-layout { grid-template-columns: 1fr; }
+            .how-image { display: none; }
+            .footer-grid { grid-template-columns: 1fr 1fr; }
         }
 
         @media (max-width: 768px) {
-            .hero { padding: 1rem; padding-top: calc(var(--nav-height) + 1rem); }
-            .floating-card-wrapper { position: relative; bottom: 0; margin-top: -60px; padding: 0 1rem; }
-            .floating-card { flex-direction: column; gap: 2rem; padding: 2rem 1rem; }
-            .nav-links { display: none; } /* Simplified for MVP */
+            .navbar { padding: 1.2rem 1.5rem; }
+            .navbar.scrolled { padding: 0.8rem 1.5rem; }
+            .nav-links { display: none; flex-direction: column; position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: var(--dark-2); align-items: center; justify-content: center; gap: 2rem; }
+            .nav-links.open { display: flex; }
+            .nav-links a { font-size: 1.1rem; }
+            .hamburger { display: flex; z-index: 1001; }
+            .section, .categories-section, .how-section, .promo-section, .cta-section { padding: 5rem 1.5rem; }
+            .footer { padding: 4rem 1.5rem 2rem; }
+            .footer-grid { grid-template-columns: 1fr; gap: 2rem; }
+            .footer-bottom { flex-direction: column; gap: 1rem; text-align: center; }
+            .stats-inner { flex-wrap: wrap; }
+            .stat-item { min-width: 50%; border-right: none; border-bottom: 1px solid rgba(255,255,255,0.06); }
+            .slider-arrow { width: 38px; height: 38px; font-size: 1rem; }
+            .slider-arrow.prev { left: 0.75rem; }
+            .slider-arrow.next { right: 0.75rem; }
+            .categories-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Navbar -->
-    <nav class="navbar">
-        <a href="index.html" class="nav-brand"><img src="images/logo1.jpg" alt="8.8 Events" style="height: 65px; display: block;"></a>
-        <div class="nav-links">
-            <a href="search.html">Find Vendors</a>
-            <a href="categories.html">Categories</a>
-            <a href="how-it-works.html">How it Works</a>
-            <a href="client-register.html">Sign Up</a>
-            <a href="register.html" class="btn btn-primary" style="color:white;">Join as Vendor</a>
-        </div>
+    <!-- ======= NAVBAR ======= -->
+    <nav class="navbar" id="navbar">
+        <a href="index.html" class="nav-logo">
+            <img src="images/logo1.jpg" alt="8.8 Events Management">
+        </a>
+        <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+            <span></span><span></span><span></span>
+        </button>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="search.html">Find Vendors</a></li>
+            <li><a href="categories.html">Categories</a></li>
+            <li><a href="how-it-works.html">How it Works</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="client-register.html">Sign Up</a></li>
+            <li><a href="register.html" class="nav-cta">Join as Vendor</a></li>
+        </ul>
     </nav>
 
-    <!-- Hero Section -->
-    <header class="hero">
-        <div class="hero-content">
-            <div class="badge">Hybrid Event Marketplace</div>
-            <h1>Plan your perfect event with <span class="highlight">Confidence</span></h1>
-            <p>Discover, compare, and book verified event vendors in Nigeria. The trusted platform for your weddings, corporate events, and social celebrations.</p>
-            
-            <div class="button-group">
-                <a href="search.html" class="btn btn-primary">Find a Vendor</a>
-                <a href="register.html" class="btn btn-hero-secondary btn">Become a Vendor</a>
+    <!-- ======= HERO SLIDER ======= -->
+    <header class="hero" id="hero">
+        <div class="slider" id="slider">
+
+            <!-- Slide 1 -->
+            <div class="slide active" id="slide-0">
+                <div class="slide-bg" style="background-image: url('https://images.unsplash.com/photo-1519167758481-83f550bb49b3?auto=format&fit=crop&w=1920&q=80');"></div>
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <span class="slide-eyebrow">Nigeria's Hybrid Event Marketplace</span>
+                    <h1>Plan Your Perfect Event with <em>Confidence</em></h1>
+                    <p>Discover, compare, and book verified event vendors across Nigeria — from weddings to corporate functions.</p>
+                    <div class="hero-buttons">
+                        <a href="search.html" class="btn-gold">Find a Vendor</a>
+                        <a href="register.html" class="btn-outline">Become a Vendor</a>
+                    </div>
+                </div>
             </div>
+
+            <!-- Slide 2 -->
+            <div class="slide" id="slide-1">
+                <div class="slide-bg" style="background-image: url('images/slide1.jpg');"></div>
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <span class="slide-eyebrow">Our Approach</span>
+                    <h1>Personalized &amp; <em>Collaborative</em> Planning</h1>
+                    <p>We work closely with you to understand your vision and goals, creating a tailored plan that meets your unique needs.</p>
+                    <div class="hero-buttons">
+                        <a href="how-it-works.html" class="btn-gold">Learn How It Works</a>
+                        <a href="about.html" class="btn-outline">About Us</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="slide" id="slide-2">
+                <div class="slide-bg" style="background-image: url('images/slide2.jpg');"></div>
+                <div class="slide-overlay"></div>
+                <div class="slide-content">
+                    <span class="slide-eyebrow">Our Team</span>
+                    <h1>Events That Are <em>Memorable</em> &amp; Seamless</h1>
+                    <p>From weddings and corporate events to birthday parties and fundraisers — our professionals deliver excellence.</p>
+                    <div class="hero-buttons">
+                        <a href="search.html" class="btn-gold">Browse Vendors</a>
+                        <a href="client-register.html" class="btn-outline">Sign Up Free</a>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
-        <div class="floating-card-wrapper">
-            <div class="floating-card">
+        <!-- Arrow Controls -->
+        <button class="slider-arrow prev" id="prev" aria-label="Previous slide">&#8592;</button>
+        <button class="slider-arrow next" id="next" aria-label="Next slide">&#8594;</button>
+
+        <!-- Dot Controls -->
+        <div class="slider-dots">
+            <button class="dot active" data-index="0" aria-label="Go to slide 1"></button>
+            <button class="dot" data-index="1" aria-label="Go to slide 2"></button>
+            <button class="dot" data-index="2" aria-label="Go to slide 3"></button>
+        </div>
+
+        <!-- Stats Bar -->
+        <div class="stats-bar">
+            <div class="stats-inner">
                 <div class="stat-item">
-                    <div class="stat-value">4</div>
-                    <div class="stat-label">Launch States</div>
+                    <div class="stat-number">36</div>
+                    <div class="stat-label">States Covered</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-value">500<span>+</span></div>
+                    <div class="stat-number">500+</div>
                     <div class="stat-label">Verified Vendors</div>
                 </div>
                 <div class="stat-item">
-                    <div class="stat-value">100<span>%</span></div>
+                    <div class="stat-number">100%</div>
                     <div class="stat-label">Payment Protection</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">7</div>
+                    <div class="stat-label">Service Categories</div>
                 </div>
             </div>
         </div>
     </header>
 
-    <!-- Featured Categories -->
-    <section class="section" style="background-color: var(--neutral-bg);">
+    <!-- ======= CATEGORIES ======= -->
+    <section class="categories-section">
         <div class="container">
-            <h2 class="section-title">Explore Services</h2>
-            <div class="category-grid">
-                <a href="categories.html#mc" class="category-card">
+            <div class="categories-header reveal">
+                <div>
+                    <span class="section-label">What We Offer</span>
+                    <h2 class="section-title" style="margin-bottom:0;">Explore Service Categories</h2>
+                </div>
+                <a href="categories.html">View All Categories →</a>
+            </div>
+            <div class="cat-grid">
+                <a href="categories.html#mc" class="cat-card reveal">
+                    <span class="cat-icon">🎤</span>
                     <h3>MC & Hosts</h3>
-                    <p>Professional voices for your events.</p>
+                    <p>Professional voices that bring your event to life.</p>
                 </a>
-                <a href="categories.html#dj" class="category-card">
+                <a href="categories.html#dj" class="cat-card reveal">
+                    <span class="cat-icon">🎧</span>
                     <h3>DJs & Sound</h3>
-                    <p>Keep the party alive with top DJs.</p>
+                    <p>Keep the energy high with top-tier DJs.</p>
                 </a>
-                <a href="categories.html#catering" class="category-card">
-                    <h3>Catering</h3>
-                    <p>Delicious food for your guests.</p>
+                <a href="categories.html#catering" class="cat-card reveal">
+                    <span class="cat-icon">🍽️</span>
+                    <h3>Catering & Food</h3>
+                    <p>Delicious cuisine for every occasion.</p>
                 </a>
-                <a href="categories.html#planner" class="category-card">
+                <a href="categories.html#planner" class="cat-card reveal">
+                    <span class="cat-icon">📋</span>
                     <h3>Event Planners</h3>
-                    <p>Expert coordination & management.</p>
+                    <p>Expert coordination from start to finish.</p>
+                </a>
+                <a href="categories.html#makeup" class="cat-card reveal">
+                    <span class="cat-icon">💄</span>
+                    <h3>Makeup & Styling</h3>
+                    <p>Look your absolute best on the big day.</p>
+                </a>
+                <a href="categories.html#print" class="cat-card reveal">
+                    <span class="cat-icon">🖨️</span>
+                    <h3>Print & Branding</h3>
+                    <p>Cards, banners & branded event materials.</p>
+                </a>
+                <a href="categories.html#fashion" class="cat-card reveal">
+                    <span class="cat-icon">👗</span>
+                    <h3>Fashion Designers</h3>
+                    <p>Custom outfits crafted for your moment.</p>
                 </a>
             </div>
         </div>
     </section>
 
-    <!-- How it Works -->
-    <section class="section" style="background: white;">
+    <!-- ======= HOW IT WORKS ======= -->
+    <section class="how-section">
         <div class="container">
-            <h2 class="section-title">How It Works</h2>
-            <div class="steps-container">
-                <div class="step">
-                    <div class="step-number">1</div>
-                    <h3>Search & Request</h3>
-                    <p>Submit your event details and budget, or browse verified vendors to request quotes directly.</p>
+            <div class="how-layout">
+                <div class="how-image reveal">
+                    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?auto=format&fit=crop&w=800&q=80" alt="Event planning in action">
+                    <div class="how-image-accent"></div>
                 </div>
-                <div class="step">
-                    <div class="step-number">2</div>
-                    <h3>Compare & Confirm</h3>
-                    <p>Receive quotes, compare options, and confirm your booking with clear terms.</p>
-                </div>
-                <div class="step">
-                    <div class="step-number">3</div>
-                    <h3>Pay securely</h3>
-                    <p>Your payment is protected. Vendors are paid only after milestones or successful delivery.</p>
+                <div>
+                    <span class="section-label reveal">Simple Process</span>
+                    <h2 class="section-title reveal">How 8.8 Events Works</h2>
+                    <div class="how-steps">
+                        <div class="how-step reveal">
+                            <div class="step-num">1</div>
+                            <div>
+                                <h3>Search & Request</h3>
+                                <p>Browse verified vendors by category, state, and budget. Submit your event details and request quotes directly.</p>
+                            </div>
+                        </div>
+                        <div class="how-step reveal">
+                            <div class="step-num">2</div>
+                            <div>
+                                <h3>Compare & Confirm</h3>
+                                <p>Review multiple quotes, read verified reviews, compare packages, and confirm your booking with clear terms.</p>
+                            </div>
+                        </div>
+                        <div class="how-step reveal">
+                            <div class="step-num">3</div>
+                            <div>
+                                <h3>Pay Securely & Celebrate</h3>
+                                <p>Your payment is protected. Vendors are paid only after successful delivery — so you can celebrate worry-free.</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-content">
-            <div>
-                <a href="index.html" class="nav-brand"><img src="images/logo1.jpg" alt="8.8 Events" style="height: 65px; display: block;"></a>
-                <p style="margin-top: 1rem; color: rgba(255,255,255,0.7);">The trusted platform for event planning in Nigeria.</p>
-            </div>
-            <div>
-                <h4>Explore</h4>
-                <ul>
-                    <li><a href="search.html">Find Vendors</a></li>
-                    <li><a href="categories.html">Categories</a></li>
-                    <li><a href="how-it-works.html">How it Works</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4>Vendors</h4>
-                <ul>
-                    <li><a href="register.html">Join 8.8 Events</a></li>
-                    <li><a href="vendor-pricing.html">Pricing & Plans</a></li>
-                    <li><a href="faq.html">Vendor FAQ</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4>Support</h4>
-                <ul>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="contact.html">Contact Support</a></li>
-                    <li><a href="legal/terms.html">Terms of Service</a></li>
-                    <li><a href="legal/privacy.html">Privacy Policy</a></li>
-                </ul>
+    <!-- ======= PROMOTIONAL SLIDES STRIP ======= -->
+    <section class="promo-section">
+        <div class="container">
+            <span class="section-label reveal">Our Philosophy</span>
+            <h2 class="section-title reveal">Built on Trust & Excellence</h2>
+        </div>
+        <div class="promo-track-wrapper" style="margin-top: 3rem;">
+            <div class="promo-track">
+                <!-- Original set -->
+                <div class="promo-card"><img src="images/slide1.jpg" alt="Our approach"></div>
+                <div class="promo-card"><img src="images/slide2.jpg" alt="Our team"></div>
+                <div class="promo-card"><img src="https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&w=600&q=80" alt="Event planning"></div>
+                <div class="promo-card"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=600&q=80" alt="Wedding event"></div>
+                <!-- Duplicate for seamless loop -->
+                <div class="promo-card"><img src="images/slide1.jpg" alt="Our approach"></div>
+                <div class="promo-card"><img src="images/slide2.jpg" alt="Our team"></div>
+                <div class="promo-card"><img src="https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?auto=format&fit=crop&w=600&q=80" alt="Event planning"></div>
+                <div class="promo-card"><img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=600&q=80" alt="Wedding event"></div>
             </div>
         </div>
-        <div class="footer-bottom">
-            &copy; 2026 8.8 Events. All rights reserved.
+    </section>
+
+    <!-- ======= CTA ======= -->
+    <section class="cta-section">
+        <div class="container reveal">
+            <span class="section-label">Get Started Today</span>
+            <h2 class="section-title" style="max-width: 600px; margin: 0 auto 1rem;">Ready to Plan Your <em style="font-style:italic; color:var(--gold);">Perfect Event?</em></h2>
+            <p style="color: var(--white-70); font-size: 1.05rem; font-weight: 300;">Join thousands of Nigerians who plan their events with confidence on 8.8 Events.</p>
+            <div class="cta-buttons">
+                <a href="search.html" class="btn-gold">Find a Vendor</a>
+                <a href="register.html" class="btn-outline">Join as a Vendor</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ======= FOOTER ======= -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-brand">
+                    <img src="images/logo1.jpg" alt="8.8 Events Management">
+                    <p>Nigeria's hybrid event marketplace — connecting clients with verified professionals for memorable celebrations.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Explore</h4>
+                    <ul>
+                        <li><a href="search.html">Find Vendors</a></li>
+                        <li><a href="categories.html">Categories</a></li>
+                        <li><a href="how-it-works.html">How it Works</a></li>
+                        <li><a href="about.html">About Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Vendors</h4>
+                    <ul>
+                        <li><a href="register.html">Join 8.8 Events</a></li>
+                        <li><a href="vendor-pricing.html">Pricing & Plans</a></li>
+                        <li><a href="faq.html">Vendor FAQ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="client-register.html">Sign Up</a></li>
+                        <li><a href="legal/terms.html">Terms of Service</a></li>
+                        <li><a href="legal/privacy.html">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <span>&copy; 2026 8.8 Events Management. All rights reserved.</span>
+                <span>Lagos · Abuja · Rivers · Kano</span>
+            </div>
         </div>
     </footer>
 
+    <script>
+        // ======= STICKY NAV =======
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 60);
+        });
+
+        // ======= HAMBURGER MENU =======
+        const hamburger = document.getElementById('hamburger');
+        const navLinks = document.getElementById('navLinks');
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('open');
+        });
+
+        // ======= HERO SLIDER =======
+        const slides = document.querySelectorAll('.slide');
+        const dots = document.querySelectorAll('.dot');
+        const slider = document.getElementById('slider');
+        let current = 0;
+        let autoPlay;
+
+        function goTo(index) {
+            slides[current].classList.remove('active');
+            dots[current].classList.remove('active');
+            current = (index + slides.length) % slides.length;
+            slides[current].classList.add('active');
+            dots[current].classList.add('active');
+            slider.style.transform = `translateX(-${current * 100}%)`;
+        }
+
+        function startAuto() {
+            autoPlay = setInterval(() => goTo(current + 1), 5500);
+        }
+
+        function resetAuto() {
+            clearInterval(autoPlay);
+            startAuto();
+        }
+
+        document.getElementById('prev').addEventListener('click', () => { goTo(current - 1); resetAuto(); });
+        document.getElementById('next').addEventListener('click', () => { goTo(current + 1); resetAuto(); });
+        dots.forEach(dot => dot.addEventListener('click', () => { goTo(parseInt(dot.dataset.index)); resetAuto(); }));
+
+        startAuto();
+
+        // ======= SCROLL REVEAL =======
+        const revealEls = document.querySelectorAll('.reveal');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry, i) => {
+                if (entry.isIntersecting) {
+                    setTimeout(() => entry.target.classList.add('visible'), i * 80);
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+
+        revealEls.forEach(el => observer.observe(el));
+    </script>
 </body>
 </html>

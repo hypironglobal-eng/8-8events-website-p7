@@ -3,190 +3,122 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vendor Pricing - 8.8 Events</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <title>Vendor Pricing – 8.8 Events Management</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .pricing-card {
-            background: white;
-            padding: 3rem 2rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            text-align: center;
-            border: 1px solid #eee;
-            position: relative;
-        }
-
-        .pricing-card.popular {
-            border: 2px solid var(--accent);
-            transform: scale(1.05);
-        }
-
-        .popular-badge {
-            position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--accent);
-            color: var(--primary);
-            padding: 0.25rem 1rem;
-            border-radius: 20px;
-            font-size: 0.875rem;
-            font-weight: bold;
-        }
-
-        .pricing-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .price {
-            font-size: 3rem;
-            font-family: var(--font-heading);
-            font-weight: 700;
-            color: var(--primary);
-            margin-bottom: 2rem;
-        }
-        
-        .price span {
-            font-size: 1rem;
-            color: var(--text-secondary);
-        }
-
-        .features {
-            list-style: none;
-            margin-bottom: 2rem;
-            text-align: left;
-        }
-
-        .features li {
-            margin-bottom: 1rem;
-            padding-left: 2rem;
-            position: relative;
-        }
-
-        .features li::before {
-            content: "✓";
-            color: var(--secondary);
-            font-weight: bold;
-            position: absolute;
-            left: 0;
-            top: 0;
-        }
+        .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; }
+        .pricing-card { background: var(--dark-card); border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radius); padding: 2.5rem 2rem; text-align: center; position: relative; transition: var(--transition); }
+        .pricing-card.popular { border-color: var(--gold-border); background: linear-gradient(135deg, var(--dark-card) 0%, rgba(201,168,76,0.05) 100%); transform: scale(1.03); }
+        .popular-badge { position: absolute; top: -14px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg,var(--gold),var(--gold-light)); color: var(--dark); padding: 0.25rem 1.2rem; border-radius: 20px; font-size: 0.75rem; font-weight: 700; letter-spacing: 0.5px; white-space: nowrap; }
+        .plan-name { font-family: var(--font-heading); font-size: 1.5rem; margin-bottom: 0.5rem; }
+        .plan-price { font-family: var(--font-heading); font-size: 3rem; font-weight: 700; color: var(--gold); margin: 1.5rem 0; line-height: 1; }
+        .plan-price sub { font-size: 1rem; color: var(--white-40); font-family: var(--font-body); font-weight: 400; }
+        .plan-features { list-style: none; text-align: left; margin: 1.5rem 0 2rem; display: flex; flex-direction: column; gap: 0.85rem; }
+        .plan-features li { font-size: 0.875rem; color: var(--white-70); display: flex; gap: 0.75rem; align-items: flex-start; }
+        .plan-features li::before { content: "✓"; color: var(--gold); font-weight: 700; flex-shrink: 0; }
+        .faq-item { border-bottom: 1px solid rgba(255,255,255,0.06); padding: 1.5rem 0; }
+        .faq-item h4 { font-family: var(--font-heading); font-size: 1.1rem; margin-bottom: 0.5rem; }
+        .faq-item p { font-size: 0.9rem; color: var(--white-70); font-weight: 300; }
+        @media (max-width: 900px) { .pricing-grid { grid-template-columns: 1fr; } .pricing-card.popular { transform: none; } }
     </style>
 </head>
 <body>
-
-    <!-- Navbar -->
-    <nav class="navbar">
-        <a href="index.html" class="nav-brand"><img src="images/logo1.jpg" alt="8.8 Events" style="height: 65px; display: block;"></a>
-        <div class="nav-links">
-            <a href="search.html">Find Vendors</a>
-            <a href="categories.html">Categories</a>
-            <a href="how-it-works.html">How it Works</a>
-            <a href="register.html" class="btn btn-primary" style="color:white;">Join as Vendor</a>
-        </div>
+    <nav class="navbar" id="navbar">
+        <a href="index.html" class="nav-logo"><img src="images/logo1.jpg" alt="8.8 Events"></a>
+        <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="search.html">Find Vendors</a></li>
+            <li><a href="categories.html">Categories</a></li>
+            <li><a href="how-it-works.html">How it Works</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="client-register.html">Sign Up</a></li>
+            <li><a href="register.html" class="nav-cta">Join as Vendor</a></li>
+        </ul>
     </nav>
 
-    <!-- Main Content -->
-    <main class="container" style="padding-top: 3rem; padding-bottom: 5rem;">
-        <h1 class="section-title" style="text-align: center; margin-bottom: 1rem;">Vendor Pricing & Plans</h1>
-        <p style="text-align: center; margin-bottom: 3rem; color: var(--text-secondary);">Transparent pricing to help you grow your event business on 8.8 Events.</p>
+    <div class="page-hero" style="text-align:center;">
+        <div class="container">
+            <span class="page-hero-label">Transparent Pricing</span>
+            <h1>Plans That Grow <em style="color:var(--gold);font-style:italic;">With You</em></h1>
+            <p>Start for free, upgrade when you're ready. No hidden fees.</p>
+        </div>
+    </div>
 
-        <div class="pricing-grid">
-            <!-- Free Plan -->
-            <div class="pricing-card">
-                <h3>Free Plan</h3>
-                <div class="price">Free<span> / for now</span></div>
-                <ul class="features">
-                    <li>Create a verified vendor profile</li>
-                    <li>List up to 3 service packages</li>
-                    <li>Receive basic quote requests</li>
-                    <li>Standard support</li>
-                    <li>Standard platform commission on bookings</li>
-                </ul>
-                <a href="register.html" class="btn btn-secondary" style="width: 100%;">Get Started</a>
+    <section class="section">
+        <div class="container">
+            <div class="pricing-grid">
+                <!-- Free -->
+                <div class="pricing-card reveal">
+                    <div class="plan-name">Free Plan</div>
+                    <div class="plan-price">₦0<sub>/mo</sub></div>
+                    <ul class="plan-features">
+                        <li>Create a verified vendor profile</li>
+                        <li>List up to 3 service packages</li>
+                        <li>Receive basic quote requests</li>
+                        <li>Standard support</li>
+                        <li>Standard platform commission</li>
+                    </ul>
+                    <a href="register.html" class="btn-outline" style="width:100%;text-align:center;">Get Started Free</a>
+                </div>
+
+                <!-- Standard -->
+                <div class="pricing-card popular reveal">
+                    <div class="popular-badge">Most Popular</div>
+                    <div class="plan-name">Standard Plan</div>
+                    <div class="plan-price">₦5,000<sub>/mo</sub></div>
+                    <ul class="plan-features">
+                        <li>Everything in Free</li>
+                        <li>List up to 10 service packages</li>
+                        <li>Priority search placement</li>
+                        <li>Standard Verified badge</li>
+                        <li>Priority email support</li>
+                    </ul>
+                    <a href="register.html" class="btn-gold" style="width:100%;text-align:center;">Choose Standard</a>
+                </div>
+
+                <!-- Premium -->
+                <div class="pricing-card reveal">
+                    <div class="plan-name">Premium Plan</div>
+                    <div class="plan-price">₦10,000<sub>/mo</sub></div>
+                    <ul class="plan-features">
+                        <li>Everything in Standard</li>
+                        <li>Featured placement in search</li>
+                        <li>Unlimited service packages</li>
+                        <li>Premium Verified badge</li>
+                        <li>Priority admin support</li>
+                        <li>Reduced platform commission</li>
+                    </ul>
+                    <a href="register.html" class="btn-ghost" style="width:100%;text-align:center;">Go Premium</a>
+                </div>
             </div>
 
-            <!-- Standard Plan -->
-            <div class="pricing-card popular">
-                <div class="popular-badge">Most Popular</div>
-                <h3>Standard Plan</h3>
-                <div class="price">₦5,000<span> / month</span></div>
-                <ul class="features">
-                    <li>Everything in Free</li>
-                    <li>List up to 10 service packages</li>
-                    <li>Priority search placement</li>
-                    <li>Standard support</li>
-                </ul>
-                <a href="register.html" class="btn btn-primary" style="width: 100%;">Choose Standard</a>
-            </div>
-
-            <!-- Premium Plan -->
-            <div class="pricing-card">
-                <h3>Premium Plan</h3>
-                <div class="price">₦10,000<span> / month</span></div>
-                <ul class="features">
-                    <li>Everything in Standard</li>
-                    <li>Featured placement in search results</li>
-                    <li>Unlimited service packages</li>
-                    <li>Premium Verified badge</li>
-                    <li>Priority admin support</li>
-                    <li>Reduced platform commission</li>
-                </ul>
-                <a href="register.html" class="btn btn-primary" style="width: 100%;">Upgrade to Premium</a>
+            <div style="margin-top:5rem;" class="reveal">
+                <span class="section-label">Common Questions</span>
+                <h2 class="section-title">Pricing FAQ</h2>
+                <div class="faq-item"><h4>Is the Free plan really free?</h4><p>Yes. You can create and maintain a verified vendor profile at no cost. We only earn a commission when you complete a booking through the platform.</p></div>
+                <div class="faq-item"><h4>What is the platform commission?</h4><p>A small percentage is deducted from each completed booking payout. Premium plan vendors enjoy a reduced commission rate. Exact rates are shared upon registration.</p></div>
+                <div class="faq-item"><h4>Can I switch plans later?</h4><p>Absolutely. You can upgrade or downgrade at any time from your vendor dashboard.</p></div>
+                <div class="faq-item"><h4>How do payments work?</h4><p>Client payments are held securely by our licensed payment partners and released to you after successful delivery of services.</p></div>
             </div>
         </div>
-        
-        <div style="text-align: center; margin-top: 4rem;">
-            <p><strong>Note:</strong> 8.8 Events currently focuses on ensuring you get paid securely. A standardized commission is deducted upon successful booking payouts. <a href="faq.html" style="color: var(--secondary); text-decoration: underline;">Learn more in the FAQ</a>.</p>
-        </div>
-    </main>
+    </section>
 
-    <!-- Footer -->
     <footer class="footer">
-        <div class="footer-content">
-            <div>
-                <a href="index.html" class="nav-brand"><img src="images/logo1.jpg" alt="8.8 Events" style="height: 65px; display: block;"></a>
-                <p style="margin-top: 1rem; color: rgba(255,255,255,0.7);">The trusted platform for event planning in Nigeria.</p>
-            </div>
-            <div>
-                <h4>Explore</h4>
-                <ul>
-                    <li><a href="search.html">Find Vendors</a></li>
-                    <li><a href="categories.html">Categories</a></li>
-                    <li><a href="how-it-works.html">How it Works</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4>Vendors</h4>
-                <ul>
-                    <li><a href="register.html">Join 8.8 Events</a></li>
-                    <li><a href="vendor-pricing.html">Pricing & Plans</a></li>
-                    <li><a href="faq.html">Vendor FAQ</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4>Support</h4>
-                <ul>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="contact.html">Contact Support</a></li>
-                    <li><a href="legal/terms.html">Terms of Service</a></li>
-                    <li><a href="legal/privacy.html">Privacy Policy</a></li>
-                </ul>
-            </div>
+        <div class="footer-grid">
+            <div class="footer-brand"><img src="images/logo1.jpg" alt="8.8 Events"><p>Nigeria's hybrid event marketplace — connecting clients with verified professionals.</p></div>
+            <div class="footer-col"><h4>Explore</h4><ul><li><a href="search.html">Find Vendors</a></li><li><a href="categories.html">Categories</a></li><li><a href="how-it-works.html">How it Works</a></li></ul></div>
+            <div class="footer-col"><h4>Vendors</h4><ul><li><a href="register.html">Join 8.8 Events</a></li><li><a href="vendor-pricing.html">Pricing & Plans</a></li><li><a href="faq.html">FAQ</a></li></ul></div>
+            <div class="footer-col"><h4>Support</h4><ul><li><a href="about.html">About Us</a></li><li><a href="contact.html">Contact</a></li><li><a href="legal/terms.html">Terms</a></li><li><a href="legal/privacy.html">Privacy</a></li></ul></div>
         </div>
-        <div class="footer-bottom">
-            &copy; 2026 8.8 Events. All rights reserved.
-        </div>
+        <div class="footer-bottom"><span>&copy; 2026 8.8 Events Management. All rights reserved.</span><span>Lagos · Abuja · Rivers · Kano</span></div>
     </footer>
 
+    <script>
+        const nb = document.getElementById('navbar');
+        window.addEventListener('scroll', () => nb.classList.toggle('scrolled', window.scrollY > 60));
+        document.getElementById('hamburger').addEventListener('click', () => document.getElementById('navLinks').classList.toggle('open'));
+        document.querySelectorAll('.reveal').forEach(el => new IntersectionObserver(([e]) => { if(e.isIntersecting){e.target.classList.add('visible');}},{threshold:0.1}).observe(el));
+    </script>
 </body>
 </html>

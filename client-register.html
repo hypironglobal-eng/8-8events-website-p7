@@ -3,169 +3,103 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customer Registration - 8.8 Events</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <title>Client Registration – 8.8 Events Management</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
-        .registration-container {
-            max-width: 500px;
-            margin: 0 auto;
-            background: white;
-            padding: 3rem;
-            border-radius: 8px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-        }
-
-        .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 0.5rem;
-            font-weight: 600;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-family: var(--font-body);
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-        }
-        
-        .switch-type {
-            text-align: center;
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
-            border-bottom: 1px solid #eee;
-        }
+        .reg-wrapper { max-width: 560px; margin: 0 auto; }
+        .reg-form { background: var(--dark-card); border: 1px solid rgba(255,255,255,0.06); border-radius: var(--radius); padding: 2.5rem; }
+        .switch-link { text-align: center; padding-top: 1.5rem; border-top: 1px solid rgba(255,255,255,0.06); margin-top: 1.5rem; font-size: 0.875rem; color: var(--white-70); }
+        .switch-link a { color: var(--gold); font-weight: 600; text-decoration: none; }
     </style>
 </head>
 <body>
-
-    <!-- Navbar -->
-    <nav class="navbar">
-        <a href="index.html" class="nav-brand"><img src="images/logo1.jpg" alt="8.8 Events" style="height: 65px; display: block;"></a>
-        <div class="nav-links">
-            <a href="search.html">Find Vendors</a>
-            <a href="categories.html">Categories</a>
-            <a href="how-it-works.html">How it Works</a>
-            <a href="client-register.html">Sign Up</a>
-            <a href="register.html" class="btn btn-primary" style="color:white;">Join as Vendor</a>
-        </div>
+    <nav class="navbar" id="navbar">
+        <a href="index.html" class="nav-logo"><img src="images/logo1.jpg" alt="8.8 Events"></a>
+        <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="search.html">Find Vendors</a></li>
+            <li><a href="categories.html">Categories</a></li>
+            <li><a href="how-it-works.html">How it Works</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="client-register.html">Sign Up</a></li>
+            <li><a href="register.html" class="nav-cta">Join as Vendor</a></li>
+        </ul>
     </nav>
 
-    <!-- Main Content -->
-    <main class="container" style="padding-top: 3rem; padding-bottom: 5rem;">
-        
-        <div class="registration-container">
-            <h1 style="text-align: center; margin-bottom: 1rem;">Create an Account</h1>
-            <p style="text-align: center; margin-bottom: 2rem; color: var(--text-secondary);">Start planning your perfect event today.</p>
-            
-            <div class="switch-type">
-                <p>Are you an event professional? <a href="register.html" style="font-weight: 600;">Register as a Vendor</a></p>
-            </div>
-
-            <form>
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>First Name</label>
-                        <input type="text" placeholder="John">
-                    </div>
-                    <div class="form-group">
-                        <label>Last Name</label>
-                        <input type="text" placeholder="Doe">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label>Email Address</label>
-                    <input type="email" placeholder="you@example.com">
-                </div>
-                
-                <div class="form-group">
-                    <label>Phone Number (Optional)</label>
-                    <input type="tel" placeholder="+234">
-                </div>
-
-                <div class="form-row">
-                    <div class="form-group">
-                        <label>State</label>
-                        <select style="width: 100%; padding: 0.75rem; border: 1px solid #ccc; border-radius: 4px; font-family: var(--font-body);">
-                            <option>Select State...</option>
-                            <option>Lagos</option>
-                            <option>Abuja</option>
-                            <option>Rivers</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label>Local Government Area (LGA)</label>
-                        <input type="text" placeholder="e.g. Ikeja">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label>Password</label>
-                    <input type="password" placeholder="Create a strong password">
-                </div>
-
-                <button type="button" class="btn btn-primary" style="width: 100%; margin-top: 1rem;">Create Account</button>
-                
-                <p style="text-align: center; margin-top: 1.5rem; font-size: 0.875rem; color: var(--text-secondary);">
-                    By registering, you agree to our <a href="legal/terms.html">Terms of Service</a> and <a href="legal/privacy.html">Privacy Policy</a>.
-                </p>
-                
-                <p style="text-align: center; margin-top: 1rem; font-weight: 600;">
-                    Already have an account? <a href="#">Log In</a>
-                </p>
-            </form>
+    <div class="page-hero">
+        <div class="container" style="text-align:center;">
+            <span class="page-hero-label">Get Started</span>
+            <h1>Create Your <em style="color:var(--gold);font-style:italic;">Client Account</em></h1>
+            <p>Start planning your perfect event with access to hundreds of verified professionals.</p>
         </div>
-    </main>
+    </div>
 
-    <!-- Footer -->
+    <section class="section">
+        <div class="container">
+            <div class="reg-wrapper">
+                <div class="reg-form reveal">
+                    <h3 style="font-family:var(--font-heading);font-size:1.5rem;margin-bottom:0.5rem;">Your Details</h3>
+                    <p style="font-size:0.875rem;color:var(--white-40);margin-bottom:2rem;">It takes less than 2 minutes to get started.</p>
+
+                    <form>
+                        <div class="form-row">
+                            <div class="form-group"><label>First Name</label><input type="text" placeholder="John"></div>
+                            <div class="form-group"><label>Last Name</label><input type="text" placeholder="Doe"></div>
+                        </div>
+                        <div class="form-group"><label>Email Address</label><input type="email" placeholder="you@example.com"></div>
+                        <div class="form-group"><label>Phone Number <span style="color:var(--white-40);">(Optional)</span></label><input type="tel" placeholder="+234 800 000 0000"></div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>State</label>
+                                <select>
+                                    <option>Select State...</option>
+                                    <option>Abia</option><option>Adamawa</option><option>Akwa Ibom</option>
+                                    <option>Anambra</option><option>Bauchi</option><option>Bayelsa</option>
+                                    <option>Benue</option><option>Borno</option><option>Cross River</option>
+                                    <option>Delta</option><option>Ebonyi</option><option>Edo</option>
+                                    <option>Ekiti</option><option>Enugu</option><option>FCT (Abuja)</option>
+                                    <option>Gombe</option><option>Imo</option><option>Jigawa</option>
+                                    <option>Kaduna</option><option>Kano</option><option>Katsina</option>
+                                    <option>Kebbi</option><option>Kogi</option><option>Kwara</option>
+                                    <option>Lagos</option><option>Nasarawa</option><option>Niger</option>
+                                    <option>Ogun</option><option>Ondo</option><option>Osun</option>
+                                    <option>Oyo</option><option>Plateau</option><option>Rivers</option>
+                                    <option>Sokoto</option><option>Taraba</option><option>Yobe</option>
+                                    <option>Zamfara</option>
+                                </select>
+                            </div>
+                            <div class="form-group"><label>Local Government Area (LGA)</label><input type="text" placeholder="e.g. Ikeja"></div>
+                        </div>
+                        <div class="form-group"><label>Password</label><input type="password" placeholder="Create a strong password"></div>
+                        <button type="button" class="btn-gold" style="width:100%;margin-top:0.5rem;">Create My Account</button>
+                    </form>
+
+                    <div class="switch-link">
+                        Are you an event professional? <a href="register.html">Register as a Vendor</a>
+                    </div>
+                    <p style="text-align:center;font-size:0.8rem;color:var(--white-40);margin-top:1rem;">Already have an account? <a href="#" style="color:var(--gold);">Log In</a></p>
+                    <p style="text-align:center;font-size:0.78rem;color:var(--white-40);margin-top:0.75rem;">By registering you agree to our <a href="legal/terms.html" style="color:var(--gold);">Terms</a> and <a href="legal/privacy.html" style="color:var(--gold);">Privacy Policy</a>.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <footer class="footer">
-        <div class="footer-content">
-            <div>
-                <a href="index.html" class="nav-brand"><img src="images/logo1.jpg" alt="8.8 Events" style="height: 65px; display: block;"></a>
-                <p style="margin-top: 1rem; color: rgba(255,255,255,0.7);">The trusted platform for event planning in Nigeria.</p>
-            </div>
-            <div>
-                <h4>Explore</h4>
-                <ul>
-                    <li><a href="search.html">Find Vendors</a></li>
-                    <li><a href="categories.html">Categories</a></li>
-                    <li><a href="how-it-works.html">How it Works</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4>Vendors</h4>
-                <ul>
-                    <li><a href="register.html">Join 8.8 Events</a></li>
-                    <li><a href="vendor-pricing.html">Pricing & Plans</a></li>
-                    <li><a href="faq.html">Vendor FAQ</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4>Support</h4>
-                <ul>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="contact.html">Contact Support</a></li>
-                    <li><a href="legal/terms.html">Terms of Service</a></li>
-                    <li><a href="legal/privacy.html">Privacy Policy</a></li>
-                </ul>
-            </div>
+        <div class="footer-grid">
+            <div class="footer-brand"><img src="images/logo1.jpg" alt="8.8 Events"><p>Nigeria's hybrid event marketplace — connecting clients with verified professionals.</p></div>
+            <div class="footer-col"><h4>Explore</h4><ul><li><a href="search.html">Find Vendors</a></li><li><a href="categories.html">Categories</a></li><li><a href="how-it-works.html">How it Works</a></li></ul></div>
+            <div class="footer-col"><h4>Vendors</h4><ul><li><a href="register.html">Join 8.8 Events</a></li><li><a href="vendor-pricing.html">Pricing & Plans</a></li><li><a href="faq.html">FAQ</a></li></ul></div>
+            <div class="footer-col"><h4>Support</h4><ul><li><a href="about.html">About Us</a></li><li><a href="contact.html">Contact</a></li><li><a href="legal/terms.html">Terms</a></li><li><a href="legal/privacy.html">Privacy</a></li></ul></div>
         </div>
-        <div class="footer-bottom">
-            &copy; 2026 8.8 Events. All rights reserved.
-        </div>
+        <div class="footer-bottom"><span>&copy; 2026 8.8 Events Management. All rights reserved.</span><span>Lagos · Abuja · Rivers · Kano</span></div>
     </footer>
 
+    <script>
+        const nb = document.getElementById('navbar');
+        window.addEventListener('scroll', () => nb.classList.toggle('scrolled', window.scrollY > 60));
+        document.getElementById('hamburger').addEventListener('click', () => document.getElementById('navLinks').classList.toggle('open'));
+        document.querySelectorAll('.reveal').forEach(el => new IntersectionObserver(([e]) => { if(e.isIntersecting){e.target.classList.add('visible');}},{threshold:0.1}).observe(el));
+    </script>
 </body>
 </html>

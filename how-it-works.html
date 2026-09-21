@@ -3,142 +3,153 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>How it Works - 8.8 Events</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <title>How It Works – 8.8 Events Management</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
-        .content-section {
-            background: white;
-            padding: 3rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            margin-bottom: 2rem;
-        }
-
-        .content-section h2 {
-            margin-bottom: 1.5rem;
-            color: var(--primary);
-        }
-
-        .content-section p {
-            margin-bottom: 1rem;
-            color: #444;
-        }
-
-        .steps-list {
-            list-style: none;
-            margin-top: 2rem;
-        }
-
-        .steps-list li {
-            margin-bottom: 1.5rem;
-            padding-left: 2rem;
-            position: relative;
-        }
-
-        .steps-list li::before {
-            content: "✓";
-            color: var(--secondary);
-            font-weight: bold;
-            position: absolute;
-            left: 0;
-            top: 2px;
-        }
-
-        .cta-box {
-            background: var(--neutral-bg);
-            border-left: 4px solid var(--accent);
-            padding: 2rem;
-            margin-top: 3rem;
-            border-radius: 0 8px 8px 0;
-        }
+        .tab-switcher { display: flex; gap: 0; border: 1px solid rgba(255,255,255,0.1); border-radius: var(--radius); overflow: hidden; max-width: 360px; margin-bottom: 3rem; }
+        .tab-btn { flex: 1; padding: 0.75rem; background: transparent; border: none; color: var(--white-70); font-family: var(--font-body); font-size: 0.875rem; font-weight: 500; cursor: pointer; transition: var(--transition); }
+        .tab-btn.active { background: linear-gradient(135deg, var(--gold), var(--gold-light)); color: var(--dark); font-weight: 600; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .step-timeline { display: flex; flex-direction: column; gap: 0; }
+        .timeline-step { display: grid; grid-template-columns: 80px 1fr; gap: 2rem; padding-bottom: 3rem; position: relative; }
+        .timeline-step:not(:last-child)::before { content: ''; position: absolute; left: 39px; top: 56px; bottom: 0; width: 2px; background: linear-gradient(to bottom, var(--gold-border), transparent); }
+        .timeline-num { width: 56px; height: 56px; border-radius: 50%; border: 1px solid var(--gold-border); display: flex; align-items: center; justify-content: center; font-family: var(--font-heading); font-size: 1.3rem; color: var(--gold); flex-shrink: 0; background: var(--dark-card); }
+        .timeline-body h3 { font-family: var(--font-heading); font-size: 1.4rem; margin-bottom: 0.5rem; padding-top: 0.75rem; }
+        .timeline-body p { font-size: 0.9rem; color: var(--white-70); font-weight: 300; }
     </style>
 </head>
 <body>
-
-    <!-- Navbar -->
-    <nav class="navbar">
-        <a href="index.html" class="nav-brand"><img src="images/logo1.jpg" alt="8.8 Events" style="height: 65px; display: block;"></a>
-        <div class="nav-links">
-            <a href="search.html">Find Vendors</a>
-            <a href="categories.html">Categories</a>
-            <a href="how-it-works.html">How it Works</a>
-            <a href="register.html" class="btn btn-primary" style="color:white;">Join as Vendor</a>
-        </div>
+    <nav class="navbar" id="navbar">
+        <a href="index.html" class="nav-logo"><img src="images/logo1.jpg" alt="8.8 Events"></a>
+        <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="search.html">Find Vendors</a></li>
+            <li><a href="categories.html">Categories</a></li>
+            <li><a href="how-it-works.html">How it Works</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="client-register.html">Sign Up</a></li>
+            <li><a href="register.html" class="nav-cta">Join as Vendor</a></li>
+        </ul>
     </nav>
 
-    <!-- Main Content -->
-    <main class="container" style="padding-top: 3rem; padding-bottom: 5rem;">
-        <h1 class="section-title" style="text-align: left; margin-bottom: 1rem;">How 8.8 Events Works</h1>
-        <p style="margin-bottom: 3rem; font-size: 1.1rem; max-width: 800px;">8.8 Events is a hybrid marketplace that brings trust and structure to event planning in Nigeria. Whether you are a first-time host or an experienced planner, we make it easy to find and book reliable vendors.</p>
-
-        <div class="content-section">
-            <h2>For Customers (Event Hosts)</h2>
-            <p>Planning an event shouldn't be stressful. We've simplified the process of finding and paying vendors.</p>
-            <ul class="steps-list">
-                <li><strong>Discover & Compare:</strong> Browse our directory of verified MCs, DJs, caterers, and planners across our launch states (Abuja, Kano, Lagos).</li>
-                <li><strong>Request Quotes:</strong> Found a vendor you like? Send them your event details, date, and budget to get a custom quote.</li>
-                <li><strong>Book Securely:</strong> Pay through our licensed payment partners. Your booking is protected, and cancellation terms are clear from the start.</li>
-                <li><strong>Get Support:</strong> If you need help matching with a vendor, our Admin team is here to assist you through the hybrid support model.</li>
-            </ul>
+    <div class="page-hero">
+        <div class="container">
+            <span class="page-hero-label">The Process</span>
+            <h1>How 8.8 Events <em style="color:var(--gold);font-style:italic;">Works</em></h1>
+            <p>A simple, protected process for both event hosts and event professionals.</p>
         </div>
+    </div>
 
-        <div class="content-section">
-            <h2>For Vendors</h2>
-            <p>Join a marketplace that values professionalism and helps you grow your event business.</p>
-            <ul class="steps-list">
-                <li><strong>Create a Profile:</strong> Set up your business profile, upload your portfolio, and list your service packages and pricing.</li>
-                <li><strong>Get Verified:</strong> Pass our verification checks to build trust with customers instantly.</li>
-                <li><strong>Receive Leads:</strong> Get quote requests directly from customers planning events in your area.</li>
-                <li><strong>Guaranteed Payouts:</strong> Track your bookings and get paid reliably after delivering your services.</li>
-            </ul>
+    <section class="section">
+        <div class="container">
+            <div class="tab-switcher reveal">
+                <button class="tab-btn active" onclick="switchTab('clients', this)">For Clients</button>
+                <button class="tab-btn" onclick="switchTab('vendors', this)">For Vendors</button>
+            </div>
+
+            <div id="tab-clients" class="tab-content active">
+                <div class="step-timeline">
+                    <div class="timeline-step reveal">
+                        <div class="timeline-num">1</div>
+                        <div class="timeline-body">
+                            <h3>Create a Free Account</h3>
+                            <p>Sign up in minutes. Share your state and LGA so we can connect you with local professionals who understand your area.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-step reveal">
+                        <div class="timeline-num">2</div>
+                        <div class="timeline-body">
+                            <h3>Search & Request Quotes</h3>
+                            <p>Browse vendors by category, location, and price range. Send quote requests to multiple vendors and compare their offers.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-step reveal">
+                        <div class="timeline-num">3</div>
+                        <div class="timeline-body">
+                            <h3>Review & Confirm Booking</h3>
+                            <p>Review proposals, check verified reviews, and confirm your booking with clear written terms — no verbal agreements.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-step reveal">
+                        <div class="timeline-num">4</div>
+                        <div class="timeline-body">
+                            <h3>Pay Securely & Celebrate</h3>
+                            <p>Your payment is held securely. Vendors are paid only upon successful event delivery. Dispute support is available if anything goes wrong.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="tab-vendors" class="tab-content">
+                <div class="step-timeline">
+                    <div class="timeline-step reveal">
+                        <div class="timeline-num">1</div>
+                        <div class="timeline-body">
+                            <h3>Register & Get Verified</h3>
+                            <p>Create your vendor account, upload your portfolio, and complete our verification process to earn a Verified badge.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-step reveal">
+                        <div class="timeline-num">2</div>
+                        <div class="timeline-body">
+                            <h3>List Your Services</h3>
+                            <p>Add your service packages with clear pricing and descriptions. Specify which states and LGAs you serve.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-step reveal">
+                        <div class="timeline-num">3</div>
+                        <div class="timeline-body">
+                            <h3>Receive & Respond to Requests</h3>
+                            <p>Get notified of client quote requests. Respond with your best offer and negotiate terms through the platform.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-step reveal">
+                        <div class="timeline-num">4</div>
+                        <div class="timeline-body">
+                            <h3>Deliver & Get Paid</h3>
+                            <p>Deliver your service, mark it complete on the platform, and receive your payout securely via our payment partner.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <div class="cta-box">
-            <h3 style="margin-bottom: 1rem;">Ready to start?</h3>
-            <p style="margin-bottom: 1.5rem;">Join thousands of Nigerians planning their events with confidence.</p>
-            <a href="search.html" class="btn btn-primary">Find a Vendor</a>
-            <a href="register.html" class="btn btn-secondary" style="margin-left: 1rem;">Register as Vendor</a>
+    <section class="section section-alt" style="text-align:center;">
+        <div class="container reveal">
+            <span class="section-label">Ready?</span>
+            <h2 class="section-title">Join Thousands Planning <em style="color:var(--gold);font-style:italic;">Better Events</em></h2>
+            <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;margin-top:2rem;">
+                <a href="client-register.html" class="btn-gold">Sign Up as a Client</a>
+                <a href="register.html" class="btn-outline">Join as a Vendor</a>
+            </div>
         </div>
-    </main>
+    </section>
 
-    <!-- Footer -->
     <footer class="footer">
-        <div class="footer-content">
-            <div>
-                <a href="index.html" class="nav-brand"><img src="images/logo1.jpg" alt="8.8 Events" style="height: 65px; display: block;"></a>
-                <p style="margin-top: 1rem; color: rgba(255,255,255,0.7);">The trusted platform for event planning in Nigeria.</p>
-            </div>
-            <div>
-                <h4>Explore</h4>
-                <ul>
-                    <li><a href="search.html">Find Vendors</a></li>
-                    <li><a href="categories.html">Categories</a></li>
-                    <li><a href="how-it-works.html">How it Works</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4>Vendors</h4>
-                <ul>
-                    <li><a href="register.html">Join 8.8 Events</a></li>
-                    <li><a href="vendor-pricing.html">Pricing & Plans</a></li>
-                    <li><a href="faq.html">Vendor FAQ</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4>Support</h4>
-                <ul>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="contact.html">Contact Support</a></li>
-                    <li><a href="legal/terms.html">Terms of Service</a></li>
-                    <li><a href="legal/privacy.html">Privacy Policy</a></li>
-                </ul>
-            </div>
+        <div class="footer-grid">
+            <div class="footer-brand"><img src="images/logo1.jpg" alt="8.8 Events"><p>Nigeria's hybrid event marketplace — connecting clients with verified professionals.</p></div>
+            <div class="footer-col"><h4>Explore</h4><ul><li><a href="search.html">Find Vendors</a></li><li><a href="categories.html">Categories</a></li><li><a href="how-it-works.html">How it Works</a></li></ul></div>
+            <div class="footer-col"><h4>Vendors</h4><ul><li><a href="register.html">Join 8.8 Events</a></li><li><a href="vendor-pricing.html">Pricing & Plans</a></li><li><a href="faq.html">FAQ</a></li></ul></div>
+            <div class="footer-col"><h4>Support</h4><ul><li><a href="about.html">About Us</a></li><li><a href="contact.html">Contact</a></li><li><a href="legal/terms.html">Terms</a></li><li><a href="legal/privacy.html">Privacy</a></li></ul></div>
         </div>
-        <div class="footer-bottom">
-            &copy; 2026 8.8 Events. All rights reserved.
-        </div>
+        <div class="footer-bottom"><span>&copy; 2026 8.8 Events Management. All rights reserved.</span><span>Lagos · Abuja · Rivers · Kano</span></div>
     </footer>
 
+    <script>
+        const nb = document.getElementById('navbar');
+        window.addEventListener('scroll', () => nb.classList.toggle('scrolled', window.scrollY > 60));
+        document.getElementById('hamburger').addEventListener('click', () => document.getElementById('navLinks').classList.toggle('open'));
+        document.querySelectorAll('.reveal').forEach(el => new IntersectionObserver(([e]) => { if(e.isIntersecting){e.target.classList.add('visible');}},{threshold:0.1}).observe(el));
+
+        function switchTab(tab, btn) {
+            document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+            document.getElementById('tab-' + tab).classList.add('active');
+            btn.classList.add('active');
+        }
+    </script>
 </body>
 </html>

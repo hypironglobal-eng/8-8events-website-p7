@@ -3,244 +3,252 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Vendor Search - 8.8 Events</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <title>Find Vendors – 8.8 Events Management</title>
+    <meta name="description" content="Search verified event vendors across all 36 states in Nigeria by category, location and budget.">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <style>
         .search-layout {
             display: grid;
-            grid-template-columns: 250px 1fr;
+            grid-template-columns: 280px 1fr;
             gap: 2rem;
-            margin-top: 2rem;
+            margin-top: 2.5rem;
         }
 
+        /* Sidebar */
         .filters {
-            background: white;
-            padding: 1.5rem;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            background: var(--dark-card);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: var(--radius);
+            padding: 1.75rem;
+            height: fit-content;
+            position: sticky;
+            top: 100px;
         }
 
-        .filter-group {
+        .filter-title {
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--gold);
             margin-bottom: 1.5rem;
         }
 
+        .filter-group { margin-bottom: 1.5rem; }
+
         .filter-group h4 {
-            margin-bottom: 0.5rem;
-            font-size: 1rem;
+            font-family: var(--font-body);
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: var(--white-70);
+            margin-bottom: 0.6rem;
+            letter-spacing: 0.3px;
         }
 
-        .filter-group select, .filter-group input {
+        .filter-group select,
+        .filter-group input {
             width: 100%;
-            padding: 0.5rem;
-            border: 1px solid #ccc;
-            border-radius: 4px;
+            padding: 0.7rem 0.9rem;
+            background: var(--dark-3);
+            border: 1px solid rgba(255,255,255,0.08);
+            border-radius: var(--radius);
+            color: var(--white);
+            font-family: var(--font-body);
+            font-size: 0.875rem;
+            outline: none;
+            -webkit-appearance: none;
         }
 
+        .filter-group select:focus,
+        .filter-group input:focus { border-color: var(--gold-border); }
+        .filter-group select option { background: var(--dark-2); }
+
+        /* Vendor Grid */
         .vendor-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
             gap: 1.5rem;
         }
 
         .vendor-card {
-            background: white;
-            border-radius: 8px;
+            background: var(--dark-card);
+            border: 1px solid rgba(255,255,255,0.06);
+            border-radius: var(--radius);
             overflow: hidden;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            transition: transform 0.3s;
+            text-decoration: none;
+            color: var(--white);
+            transition: var(--transition);
+            display: block;
         }
 
-        .vendor-card:hover {
-            transform: translateY(-5px);
-        }
+        .vendor-card:hover { border-color: var(--gold-border); transform: translateY(-5px); }
 
-        .vendor-image {
+        .vendor-img {
             width: 100%;
             height: 180px;
             object-fit: cover;
-            background-color: #eee;
+            display: block;
         }
 
-        .vendor-info {
-            padding: 1.5rem;
+        .vendor-body { padding: 1.25rem; }
+        .vendor-body h3 { font-family: var(--font-heading); font-size: 1.2rem; margin-bottom: 0.25rem; }
+        .vendor-meta { font-size: 0.8rem; color: var(--white-40); margin-bottom: 0.75rem; }
+        .vendor-rating { font-size: 0.875rem; font-weight: 600; color: var(--gold); }
+
+        .results-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            color: var(--white-70);
+            font-size: 0.9rem;
         }
 
-        .vendor-info h3 {
-            margin-bottom: 0.25rem;
-        }
-
-        .vendor-category {
-            color: var(--text-secondary);
-            font-size: 0.875rem;
-            margin-bottom: 1rem;
-        }
-
-        @media (max-width: 768px) {
-            .search-layout {
-                grid-template-columns: 1fr;
-            }
+        @media (max-width: 900px) {
+            .search-layout { grid-template-columns: 1fr; }
+            .filters { position: static; }
         }
     </style>
 </head>
 <body>
-
-    <!-- Navbar -->
-    <nav class="navbar">
-        <a href="index.html" class="nav-brand"><img src="images/logo1.jpg" alt="8.8 Events" style="height: 65px; display: block;"></a>
-        <div class="nav-links">
-            <a href="search.html">Find Vendors</a>
-            <a href="categories.html">Categories</a>
-            <a href="how-it-works.html">How it Works</a>
-            <a href="register.html" class="btn btn-primary" style="color:white;">Join as Vendor</a>
-        </div>
+    <nav class="navbar" id="navbar">
+        <a href="index.html" class="nav-logo"><img src="images/logo1.jpg" alt="8.8 Events"></a>
+        <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="search.html">Find Vendors</a></li>
+            <li><a href="categories.html">Categories</a></li>
+            <li><a href="how-it-works.html">How it Works</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="client-register.html">Sign Up</a></li>
+            <li><a href="register.html" class="nav-cta">Join as Vendor</a></li>
+        </ul>
     </nav>
 
-    <!-- Main Content -->
-    <main class="container" style="padding-top: 3rem; padding-bottom: 5rem;">
-        <h1 class="section-title" style="text-align: left; margin-bottom: 1rem;">Find Vendors</h1>
-        <p>Discover the best event professionals in Nigeria.</p>
+    <div class="page-hero">
+        <div class="container">
+            <span class="page-hero-label">Vendor Directory</span>
+            <h1>Find Your Perfect <em style="color:var(--gold);font-style:italic;">Event Vendor</em></h1>
+            <p>Browse verified professionals across Nigeria, filtered by state, category, and budget.</p>
+        </div>
+    </div>
 
-        <div class="search-layout">
-            <!-- Sidebar Filters -->
-            <aside class="filters">
-                <div class="filter-group">
-                    <h4>Location</h4>
-                    <select>
-                        <option>All Locations</option>
-                        <option>Abia</option>
-                        <option>Adamawa</option>
-                        <option>Akwa Ibom</option>
-                        <option>Anambra</option>
-                        <option>Bauchi</option>
-                        <option>Bayelsa</option>
-                        <option>Benue</option>
-                        <option>Borno</option>
-                        <option>Cross River</option>
-                        <option>Delta</option>
-                        <option>Ebonyi</option>
-                        <option>Edo</option>
-                        <option>Ekiti</option>
-                        <option>Enugu</option>
-                        <option>FCT (Abuja)</option>
-                        <option>Gombe</option>
-                        <option>Imo</option>
-                        <option>Jigawa</option>
-                        <option>Kaduna</option>
-                        <option>Kano</option>
-                        <option>Katsina</option>
-                        <option>Kebbi</option>
-                        <option>Kogi</option>
-                        <option>Kwara</option>
-                        <option>Lagos</option>
-                        <option>Nasarawa</option>
-                        <option>Niger</option>
-                        <option>Ogun</option>
-                        <option>Ondo</option>
-                        <option>Osun</option>
-                        <option>Oyo</option>
-                        <option>Plateau</option>
-                        <option>Rivers</option>
-                        <option>Sokoto</option>
-                        <option>Taraba</option>
-                        <option>Yobe</option>
-                        <option>Zamfara</option>
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <h4>Category</h4>
-                    <select>
-                        <option>All Categories</option>
-                        <option>MC & Hosts</option>
-                        <option>DJs</option>
-                        <option>Catering</option>
-                        <option>Event Planning</option>
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <h4>Price Range</h4>
-                    <select>
-                        <option>Any Price</option>
-                        <option>₦0 - ₦100,000</option>
-                        <option>₦100,000 - ₦500,000</option>
-                        <option>₦500,000+</option>
-                    </select>
-                </div>
-                <button class="btn btn-primary" style="width: 100%;">Apply Filters</button>
-            </aside>
+    <main class="section">
+        <div class="container">
+            <div class="search-layout">
+                <!-- Sidebar -->
+                <aside class="filters">
+                    <div class="filter-title">Filter Results</div>
+                    <div class="filter-group">
+                        <h4>State / Location</h4>
+                        <select>
+                            <option>All States</option>
+                            <option>Abia</option><option>Adamawa</option><option>Akwa Ibom</option>
+                            <option>Anambra</option><option>Bauchi</option><option>Bayelsa</option>
+                            <option>Benue</option><option>Borno</option><option>Cross River</option>
+                            <option>Delta</option><option>Ebonyi</option><option>Edo</option>
+                            <option>Ekiti</option><option>Enugu</option><option>FCT (Abuja)</option>
+                            <option>Gombe</option><option>Imo</option><option>Jigawa</option>
+                            <option>Kaduna</option><option>Kano</option><option>Katsina</option>
+                            <option>Kebbi</option><option>Kogi</option><option>Kwara</option>
+                            <option>Lagos</option><option>Nasarawa</option><option>Niger</option>
+                            <option>Ogun</option><option>Ondo</option><option>Osun</option>
+                            <option>Oyo</option><option>Plateau</option><option>Rivers</option>
+                            <option>Sokoto</option><option>Taraba</option><option>Yobe</option>
+                            <option>Zamfara</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <h4>Category</h4>
+                        <select>
+                            <option>All Categories</option>
+                            <option>MC & Hosts</option>
+                            <option>DJs & Sound</option>
+                            <option>Catering & Food</option>
+                            <option>Event Planning</option>
+                            <option>Makeup & Styling</option>
+                            <option>Print & Branding</option>
+                            <option>Fashion Designers</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <h4>Price Range</h4>
+                        <select>
+                            <option>Any Price</option>
+                            <option>₦0 – ₦100,000</option>
+                            <option>₦100,000 – ₦500,000</option>
+                            <option>₦500,000+</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <h4>Verified Only</h4>
+                        <select>
+                            <option>All Vendors</option>
+                            <option>Verified Only</option>
+                            <option>Premium Vendors</option>
+                        </select>
+                    </div>
+                    <button class="btn-gold" style="width:100%; margin-top:0.5rem;">Apply Filters</button>
+                </aside>
 
-            <!-- Results Grid -->
-            <div class="vendor-grid">
-                <!-- Vendor 1 -->
-                <a href="vendor-profile.html" class="vendor-card" style="text-decoration: none; color: inherit;">
-                    <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="DJ Flow" class="vendor-image">
-                    <div class="vendor-info">
-                        <h3>DJ Flow</h3>
-                        <div class="vendor-category">DJ & Sound • Lagos</div>
-                        <p style="font-weight: 600;">⭐ 4.9 (42 reviews)</p>
+                <!-- Results -->
+                <div>
+                    <div class="results-header">
+                        <span>Showing 3 vendors</span>
+                        <select style="background:var(--dark-card);border:1px solid rgba(255,255,255,0.08);color:var(--white);padding:0.4rem 0.8rem;border-radius:var(--radius);font-family:var(--font-body);outline:none;">
+                            <option>Sort: Top Rated</option>
+                            <option>Sort: Price Low–High</option>
+                            <option>Sort: Newest</option>
+                        </select>
                     </div>
-                </a>
-                
-                <!-- Vendor 2 -->
-                <a href="vendor-profile.html" class="vendor-card" style="text-decoration: none; color: inherit;">
-                    <img src="https://images.unsplash.com/photo-1555244162-803834f70033?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Taste Makers Catering" class="vendor-image">
-                    <div class="vendor-info">
-                        <h3>Taste Makers Catering</h3>
-                        <div class="vendor-category">Catering • Abuja</div>
-                        <p style="font-weight: 600;">⭐ 4.8 (28 reviews)</p>
+                    <div class="vendor-grid">
+                        <a href="vendor-profile.html" class="vendor-card">
+                            <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?auto=format&fit=crop&w=600&q=80" alt="DJ Flow" class="vendor-img">
+                            <div class="vendor-body">
+                                <h3>DJ Flow</h3>
+                                <div class="vendor-meta">DJs & Sound &nbsp;·&nbsp; Lagos</div>
+                                <div class="vendor-rating">⭐ 4.9 &nbsp;<span style="color:var(--white-40);font-weight:400;">(42 reviews)</span></div>
+                            </div>
+                        </a>
+                        <a href="vendor-profile.html" class="vendor-card">
+                            <img src="https://images.unsplash.com/photo-1555244162-803834f70033?auto=format&fit=crop&w=600&q=80" alt="Taste Makers" class="vendor-img">
+                            <div class="vendor-body">
+                                <h3>Taste Makers Catering</h3>
+                                <div class="vendor-meta">Catering & Food &nbsp;·&nbsp; Abuja</div>
+                                <div class="vendor-rating">⭐ 4.8 &nbsp;<span style="color:var(--white-40);font-weight:400;">(28 reviews)</span></div>
+                            </div>
+                        </a>
+                        <a href="vendor-profile.html" class="vendor-card">
+                            <img src="https://images.unsplash.com/photo-1475721028314-3950d5c7b3dd?auto=format&fit=crop&w=600&q=80" alt="Premium Planners" class="vendor-img">
+                            <div class="vendor-body">
+                                <h3>Premium Event Planners</h3>
+                                <div class="vendor-meta">Event Planning &nbsp;·&nbsp; Kano</div>
+                                <div class="vendor-rating">⭐ 5.0 &nbsp;<span style="color:var(--white-40);font-weight:400;">(15 reviews)</span></div>
+                            </div>
+                        </a>
                     </div>
-                </a>
-
-                <!-- Vendor 3 -->
-                <a href="vendor-profile.html" class="vendor-card" style="text-decoration: none; color: inherit;">
-                    <img src="https://images.unsplash.com/photo-1475721028314-3950d5c7b3dd?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Premium Event Planning" class="vendor-image">
-                    <div class="vendor-info">
-                        <h3>Premium Event Planners</h3>
-                        <div class="vendor-category">Event Planning • Kano</div>
-                        <p style="font-weight: 600;">⭐ 5.0 (15 reviews)</p>
-                    </div>
-                </a>
+                </div>
             </div>
         </div>
     </main>
 
-    <!-- Footer -->
     <footer class="footer">
-        <div class="footer-content">
-            <div>
-                <a href="index.html" class="nav-brand"><img src="images/logo1.jpg" alt="8.8 Events" style="height: 65px; display: block;"></a>
-                <p style="margin-top: 1rem; color: rgba(255,255,255,0.7);">The trusted platform for event planning in Nigeria.</p>
-            </div>
-            <div>
-                <h4>Explore</h4>
-                <ul>
-                    <li><a href="search.html">Find Vendors</a></li>
-                    <li><a href="categories.html">Categories</a></li>
-                    <li><a href="how-it-works.html">How it Works</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4>Vendors</h4>
-                <ul>
-                    <li><a href="register.html">Join 8.8 Events</a></li>
-                    <li><a href="vendor-pricing.html">Pricing & Plans</a></li>
-                    <li><a href="faq.html">Vendor FAQ</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4>Support</h4>
-                <ul>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="contact.html">Contact Support</a></li>
-                    <li><a href="legal/terms.html">Terms of Service</a></li>
-                    <li><a href="legal/privacy.html">Privacy Policy</a></li>
-                </ul>
-            </div>
+        <div class="footer-grid">
+            <div class="footer-brand"><img src="images/logo1.jpg" alt="8.8 Events"><p>Nigeria's hybrid event marketplace — connecting clients with verified professionals.</p></div>
+            <div class="footer-col"><h4>Explore</h4><ul><li><a href="search.html">Find Vendors</a></li><li><a href="categories.html">Categories</a></li><li><a href="how-it-works.html">How it Works</a></li></ul></div>
+            <div class="footer-col"><h4>Vendors</h4><ul><li><a href="register.html">Join 8.8 Events</a></li><li><a href="vendor-pricing.html">Pricing & Plans</a></li><li><a href="faq.html">FAQ</a></li></ul></div>
+            <div class="footer-col"><h4>Support</h4><ul><li><a href="about.html">About Us</a></li><li><a href="contact.html">Contact</a></li><li><a href="legal/terms.html">Terms</a></li><li><a href="legal/privacy.html">Privacy</a></li></ul></div>
         </div>
-        <div class="footer-bottom">
-            &copy; 2026 8.8 Events. All rights reserved.
-        </div>
+        <div class="footer-bottom"><span>&copy; 2026 8.8 Events Management. All rights reserved.</span><span>Lagos · Abuja · Rivers · Kano</span></div>
     </footer>
 
+    <script>
+        const nb = document.getElementById('navbar');
+        window.addEventListener('scroll', () => nb.classList.toggle('scrolled', window.scrollY > 60));
+        document.getElementById('hamburger').addEventListener('click', () => document.getElementById('navLinks').classList.toggle('open'));
+        document.querySelectorAll('.reveal').forEach(el => {
+            new IntersectionObserver(([e]) => { if (e.isIntersecting) { e.target.classList.add('visible'); } }, {threshold:0.1}).observe(el);
+        });
+    </script>
 </body>
 </html>
