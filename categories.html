@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendor Categories - 8.8 Events</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .category-card {
+            background: white;
+            border-radius: 12px;
+            padding: 3rem 2rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            border-bottom: 4px solid transparent;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            border-bottom: 4px solid var(--secondary);
+        }
+
+        .category-card h3 {
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="index.html" class="nav-brand"><img src="images/logo1.jpg" alt="8.8 Events" style="height: 65px; display: block;"></a>
+        <div class="nav-links">
+            <a href="search.html">Find Vendors</a>
+            <a href="categories.html">Categories</a>
+            <a href="how-it-works.html">How it Works</a>
+            <a href="register.html" class="btn btn-primary" style="color:white;">Join as Vendor</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container" style="padding-top: 3rem; padding-bottom: 5rem;">
+        <h1 class="section-title" style="text-align: center; margin-bottom: 1rem;">Browse by Category</h1>
+        <p style="text-align: center; margin-bottom: 3rem; color: var(--text-secondary);">Find the perfect vendor for every aspect of your event across our launch states.</p>
+
+        <div class="category-grid">
+            <a href="search.html?category=mc" class="category-card" id="mc">
+                <h3>🎤 MCs & Hosts</h3>
+                <p>Professional voices, comedians, and hosts for your events.</p>
+            </a>
+            <a href="search.html?category=dj" class="category-card" id="dj">
+                <h3>🎧 DJs & Sound</h3>
+                <p>Keep the party alive with top DJs and sound equipment.</p>
+            </a>
+            <a href="search.html?category=catering" class="category-card" id="catering">
+                <h3>🍽️ Catering & Food</h3>
+                <p>Delicious local and intercontinental dishes for your guests.</p>
+            </a>
+            <a href="search.html?category=planner" class="category-card" id="planner">
+                <h3>📋 Event Planners</h3>
+                <p>Expert coordination & management to keep your event stress-free.</p>
+            </a>
+            <a href="search.html?category=makeup" class="category-card" id="makeup">
+                <h3>💄 Makeup & Styling</h3>
+                <p>Professional MUA and hair stylists for your big day.</p>
+            </a>
+            <a href="search.html?category=printing" class="category-card" id="printing">
+                <h3>🖨️ Printing & Branding</h3>
+                <p>Invitations, banners, souvenirs, and branded materials.</p>
+            </a>
+            <a href="search.html?category=fashion" class="category-card" id="fashion">
+                <h3>👗 Fashion Designers</h3>
+                <p>Wedding gowns, tailored suits, and custom event outfits.</p>
+            </a>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div>
+                <a href="index.html" class="nav-brand"><img src="images/logo1.jpg" alt="8.8 Events" style="height: 65px; display: block;"></a>
+                <p style="margin-top: 1rem; color: rgba(255,255,255,0.7);">The trusted platform for event planning in Nigeria.</p>
+            </div>
+            <div>
+                <h4>Explore</h4>
+                <ul>
+                    <li><a href="search.html">Find Vendors</a></li>
+                    <li><a href="categories.html">Categories</a></li>
+                    <li><a href="how-it-works.html">How it Works</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Vendors</h4>
+                <ul>
+                    <li><a href="register.html">Join 8.8 Events</a></li>
+                    <li><a href="vendor-pricing.html">Pricing & Plans</a></li>
+                    <li><a href="faq.html">Vendor FAQ</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact Support</a></li>
+                    <li><a href="legal/terms.html">Terms of Service</a></li>
+                    <li><a href="legal/privacy.html">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 8.8 Events. All rights reserved.
+        </div>
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Frequently Asked Questions - 8.8 Events</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .faq-item {
+            background: white;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: 1.5rem;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .faq-question:hover {
+            color: var(--secondary);
+        }
+
+        .faq-answer {
+            padding: 0 1.5rem 1.5rem;
+            color: var(--text-secondary);
+            display: block; /* In a real app, JS would toggle this */
+            border-top: 1px solid #eee;
+            margin-top: -0.5rem;
+            padding-top: 1.5rem;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="index.html" class="nav-brand"><img src="images/logo1.jpg" alt="8.8 Events" style="height: 65px; display: block;"></a>
+        <div class="nav-links">
+            <a href="search.html">Find Vendors</a>
+            <a href="categories.html">Categories</a>
+            <a href="how-it-works.html">How it Works</a>
+            <a href="register.html" class="btn btn-primary" style="color:white;">Join as Vendor</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container" style="padding-top: 3rem; padding-bottom: 5rem; max-width: 800px;">
+        <h1 class="section-title" style="text-align: center; margin-bottom: 3rem;">Frequently Asked Questions</h1>
+        
+        <div class="faq-list">
+            <div class="faq-item">
+                <div class="faq-question">How does 8.8 Events verify vendors? <span>▼</span></div>
+                <div class="faq-answer">Vendors must provide valid identification, business registration (where applicable), and portfolio evidence. Our admin team manually reviews and approves all vendor applications before they go live on the marketplace.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Is my payment secure? <span>▼</span></div>
+                <div class="faq-answer">Yes. Payments are processed through licensed payment partners (e.g., Paystack). We ensure there is a clear booking record, cancellation policy, and dispute resolution process tied to every transaction.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">What happens if a vendor cancels? <span>▼</span></div>
+                <div class="faq-answer">If a vendor cancels prior to service delivery and no replacement is accepted, you are entitled to a full refund according to our standardized platform refund policy.</div>
+            </div>
+
+            <div class="faq-item">
+                <div class="faq-question">Can I get help finding a vendor? <span>▼</span></div>
+                <div class="faq-answer">Absolutely. Because we operate a hybrid model, our Admin support team can assist you with vendor matching and quote follow-ups if you prefer not to manage the search entirely on your own.</div>
+            </div>
+            
+            <div class="faq-item">
+                <div class="faq-question">How do vendor payouts work? <span>▼</span></div>
+                <div class="faq-answer">Vendors receive payouts based on the agreed milestone terms or after successful service delivery is confirmed, ensuring trust and accountability for both parties.</div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div>
+                <a href="index.html" class="nav-brand"><img src="images/logo1.jpg" alt="8.8 Events" style="height: 65px; display: block;"></a>
+                <p style="margin-top: 1rem; color: rgba(255,255,255,0.7);">The trusted platform for event planning in Nigeria.</p>
+            </div>
+            <div>
+                <h4>Explore</h4>
+                <ul>
+                    <li><a href="search.html">Find Vendors</a></li>
+                    <li><a href="categories.html">Categories</a></li>
+                    <li><a href="how-it-works.html">How it Works</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Vendors</h4>
+                <ul>
+                    <li><a href="register.html">Join 8.8 Events</a></li>
+                    <li><a href="vendor-pricing.html">Pricing & Plans</a></li>
+                    <li><a href="faq.html">Vendor FAQ</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact Support</a></li>
+                    <li><a href="legal/terms.html">Terms of Service</a></li>
+                    <li><a href="legal/privacy.html">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 8.8 Events. All rights reserved.
+        </div>
+    </footer>
+
+</body>
+</html>

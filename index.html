@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>8.8 Events - Hybrid Event Marketplace</title>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* Homepage specific styles */
+        .hero {
+            position: relative;
+            min-height: calc(100vh - var(--nav-height));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            background-image: linear-gradient(rgba(26, 26, 46, 0.8), rgba(26, 26, 46, 0.8)), url('https://images.unsplash.com/photo-1519167758481-83f550bb49b3?ixlib=rb-4.0.3&auto=format&fit=crop&w=1920&q=80');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: white;
+            text-align: center;
+            overflow: hidden;
+            margin-top: -var(--nav-height); /* Pull up under transparent nav if we want, or just let it sit below */
+            padding-top: calc(var(--nav-height) + 2rem);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-bottom: 80px;
+        }
+
+        .badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(4px);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 4.5rem);
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 .highlight {
+            color: var(--accent);
+        }
+
+        .hero p {
+            font-size: clamp(1rem, 2vw, 1.25rem);
+            color: rgba(255, 255, 255, 0.85);
+            margin-bottom: 2.5rem;
+            max-width: 600px;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-hero-secondary {
+            background-color: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-hero-secondary:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .floating-card-wrapper {
+            position: absolute;
+            bottom: -50px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            z-index: 10;
+        }
+
+        .floating-card {
+            background: white;
+            color: var(--primary);
+            border-radius: 12px;
+            padding: 2rem;
+            display: flex;
+            gap: 3rem;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(0, 0, 0, 0.05);
+            width: 90%;
+            max-width: 800px;
+            justify-content: space-around;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .stat-value {
+            font-family: var(--font-heading);
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value span {
+            color: var(--secondary);
+            font-size: 1.5rem;
+            vertical-align: super;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Categories */
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 5rem;
+        }
+
+        .category-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        /* How it works */
+        .steps-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+        
+        .step {
+            text-align: center;
+        }
+        
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--secondary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0 auto 1.5rem;
+            font-family: var(--font-heading);
+        }
+
+        @media (max-width: 768px) {
+            .hero { padding: 1rem; padding-top: calc(var(--nav-height) + 1rem); }
+            .floating-card-wrapper { position: relative; bottom: 0; margin-top: -60px; padding: 0 1rem; }
+            .floating-card { flex-direction: column; gap: 2rem; padding: 2rem 1rem; }
+            .nav-links { display: none; } /* Simplified for MVP */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="index.html" class="nav-brand"><img src="images/logo1.jpg" alt="8.8 Events" style="height: 65px; display: block;"></a>
+        <div class="nav-links">
+            <a href="search.html">Find Vendors</a>
+            <a href="categories.html">Categories</a>
+            <a href="how-it-works.html">How it Works</a>
+            <a href="client-register.html">Sign Up</a>
+            <a href="register.html" class="btn btn-primary" style="color:white;">Join as Vendor</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <div class="hero-content">
+            <div class="badge">Hybrid Event Marketplace</div>
+            <h1>Plan your perfect event with <span class="highlight">Confidence</span></h1>
+            <p>Discover, compare, and book verified event vendors in Nigeria. The trusted platform for your weddings, corporate events, and social celebrations.</p>
+            
+            <div class="button-group">
+                <a href="search.html" class="btn btn-primary">Find a Vendor</a>
+                <a href="register.html" class="btn btn-hero-secondary btn">Become a Vendor</a>
+            </div>
+        </div>
+
+        <div class="floating-card-wrapper">
+            <div class="floating-card">
+                <div class="stat-item">
+                    <div class="stat-value">4</div>
+                    <div class="stat-label">Launch States</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">500<span>+</span></div>
+                    <div class="stat-label">Verified Vendors</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-value">100<span>%</span></div>
+                    <div class="stat-label">Payment Protection</div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Featured Categories -->
+    <section class="section" style="background-color: var(--neutral-bg);">
+        <div class="container">
+            <h2 class="section-title">Explore Services</h2>
+            <div class="category-grid">
+                <a href="categories.html#mc" class="category-card">
+                    <h3>MC & Hosts</h3>
+                    <p>Professional voices for your events.</p>
+                </a>
+                <a href="categories.html#dj" class="category-card">
+                    <h3>DJs & Sound</h3>
+                    <p>Keep the party alive with top DJs.</p>
+                </a>
+                <a href="categories.html#catering" class="category-card">
+                    <h3>Catering</h3>
+                    <p>Delicious food for your guests.</p>
+                </a>
+                <a href="categories.html#planner" class="category-card">
+                    <h3>Event Planners</h3>
+                    <p>Expert coordination & management.</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- How it Works -->
+    <section class="section" style="background: white;">
+        <div class="container">
+            <h2 class="section-title">How It Works</h2>
+            <div class="steps-container">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Search & Request</h3>
+                    <p>Submit your event details and budget, or browse verified vendors to request quotes directly.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Compare & Confirm</h3>
+                    <p>Receive quotes, compare options, and confirm your booking with clear terms.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Pay securely</h3>
+                    <p>Your payment is protected. Vendors are paid only after milestones or successful delivery.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div>
+                <a href="index.html" class="nav-brand"><img src="images/logo1.jpg" alt="8.8 Events" style="height: 65px; display: block;"></a>
+                <p style="margin-top: 1rem; color: rgba(255,255,255,0.7);">The trusted platform for event planning in Nigeria.</p>
+            </div>
+            <div>
+                <h4>Explore</h4>
+                <ul>
+                    <li><a href="search.html">Find Vendors</a></li>
+                    <li><a href="categories.html">Categories</a></li>
+                    <li><a href="how-it-works.html">How it Works</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Vendors</h4>
+                <ul>
+                    <li><a href="register.html">Join 8.8 Events</a></li>
+                    <li><a href="vendor-pricing.html">Pricing & Plans</a></li>
+                    <li><a href="faq.html">Vendor FAQ</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact Support</a></li>
+                    <li><a href="legal/terms.html">Terms of Service</a></li>
+                    <li><a href="legal/privacy.html">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 8.8 Events. All rights reserved.
+        </div>
+    </footer>
+
+</body>
+</html>

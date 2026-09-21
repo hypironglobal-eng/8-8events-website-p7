@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vendor Pricing - 8.8 Events</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .pricing-card {
+            background: white;
+            padding: 3rem 2rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            text-align: center;
+            border: 1px solid #eee;
+            position: relative;
+        }
+
+        .pricing-card.popular {
+            border: 2px solid var(--accent);
+            transform: scale(1.05);
+        }
+
+        .popular-badge {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--accent);
+            color: var(--primary);
+            padding: 0.25rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: bold;
+        }
+
+        .pricing-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-size: 3rem;
+            font-family: var(--font-heading);
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 2rem;
+        }
+        
+        .price span {
+            font-size: 1rem;
+            color: var(--text-secondary);
+        }
+
+        .features {
+            list-style: none;
+            margin-bottom: 2rem;
+            text-align: left;
+        }
+
+        .features li {
+            margin-bottom: 1rem;
+            padding-left: 2rem;
+            position: relative;
+        }
+
+        .features li::before {
+            content: "✓";
+            color: var(--secondary);
+            font-weight: bold;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="index.html" class="nav-brand"><img src="images/logo1.jpg" alt="8.8 Events" style="height: 65px; display: block;"></a>
+        <div class="nav-links">
+            <a href="search.html">Find Vendors</a>
+            <a href="categories.html">Categories</a>
+            <a href="how-it-works.html">How it Works</a>
+            <a href="register.html" class="btn btn-primary" style="color:white;">Join as Vendor</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container" style="padding-top: 3rem; padding-bottom: 5rem;">
+        <h1 class="section-title" style="text-align: center; margin-bottom: 1rem;">Vendor Pricing & Plans</h1>
+        <p style="text-align: center; margin-bottom: 3rem; color: var(--text-secondary);">Transparent pricing to help you grow your event business on 8.8 Events.</p>
+
+        <div class="pricing-grid">
+            <!-- Free Plan -->
+            <div class="pricing-card">
+                <h3>Free Plan</h3>
+                <div class="price">Free<span> / for now</span></div>
+                <ul class="features">
+                    <li>Create a verified vendor profile</li>
+                    <li>List up to 3 service packages</li>
+                    <li>Receive basic quote requests</li>
+                    <li>Standard support</li>
+                    <li>Standard platform commission on bookings</li>
+                </ul>
+                <a href="register.html" class="btn btn-secondary" style="width: 100%;">Get Started</a>
+            </div>
+
+            <!-- Standard Plan -->
+            <div class="pricing-card popular">
+                <div class="popular-badge">Most Popular</div>
+                <h3>Standard Plan</h3>
+                <div class="price">₦5,000<span> / month</span></div>
+                <ul class="features">
+                    <li>Everything in Free</li>
+                    <li>List up to 10 service packages</li>
+                    <li>Priority search placement</li>
+                    <li>Standard support</li>
+                </ul>
+                <a href="register.html" class="btn btn-primary" style="width: 100%;">Choose Standard</a>
+            </div>
+
+            <!-- Premium Plan -->
+            <div class="pricing-card">
+                <h3>Premium Plan</h3>
+                <div class="price">₦10,000<span> / month</span></div>
+                <ul class="features">
+                    <li>Everything in Standard</li>
+                    <li>Featured placement in search results</li>
+                    <li>Unlimited service packages</li>
+                    <li>Premium Verified badge</li>
+                    <li>Priority admin support</li>
+                    <li>Reduced platform commission</li>
+                </ul>
+                <a href="register.html" class="btn btn-primary" style="width: 100%;">Upgrade to Premium</a>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin-top: 4rem;">
+            <p><strong>Note:</strong> 8.8 Events currently focuses on ensuring you get paid securely. A standardized commission is deducted upon successful booking payouts. <a href="faq.html" style="color: var(--secondary); text-decoration: underline;">Learn more in the FAQ</a>.</p>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div>
+                <a href="index.html" class="nav-brand"><img src="images/logo1.jpg" alt="8.8 Events" style="height: 65px; display: block;"></a>
+                <p style="margin-top: 1rem; color: rgba(255,255,255,0.7);">The trusted platform for event planning in Nigeria.</p>
+            </div>
+            <div>
+                <h4>Explore</h4>
+                <ul>
+                    <li><a href="search.html">Find Vendors</a></li>
+                    <li><a href="categories.html">Categories</a></li>
+                    <li><a href="how-it-works.html">How it Works</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Vendors</h4>
+                <ul>
+                    <li><a href="register.html">Join 8.8 Events</a></li>
+                    <li><a href="vendor-pricing.html">Pricing & Plans</a></li>
+                    <li><a href="faq.html">Vendor FAQ</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact Support</a></li>
+                    <li><a href="legal/terms.html">Terms of Service</a></li>
+                    <li><a href="legal/privacy.html">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 8.8 Events. All rights reserved.
+        </div>
+    </footer>
+
+</body>
+</html>

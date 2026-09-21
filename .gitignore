@@ -1,0 +1,36 @@
+# Node / npm (in case any tools are added later)
+node_modules/
+npm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+Desktop.ini
+
+# Microsoft Office temp files
+~$*
+*.tmp
+~WRL*.tmp
+
+# Editor files
+.vscode/settings.json
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Environment / secrets
+.env
+.env.local
+.env.*.local
+
+# Build output (if frameworks added later)
+dist/
+build/
+.cache/
+
+# Temporary files
+*.tmp
+*.log

@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DJ Flow - Vendor Profile - 8.8 Events</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .profile-header {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+            align-items: center;
+        }
+
+        .profile-image {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid white;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .profile-info h1 {
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .badge-verified {
+            background-color: #28a745;
+            color: white;
+            font-size: 0.75rem;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+
+        .profile-content {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 2rem;
+        }
+
+        .content-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            margin-bottom: 2rem;
+        }
+
+        .content-card h2 {
+            margin-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 0.5rem;
+        }
+
+        .service-item {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem 0;
+            border-bottom: 1px solid #f8f9fa;
+        }
+
+        .service-item h4 {
+            margin-bottom: 0.25rem;
+        }
+
+        .price {
+            font-weight: 600;
+            color: var(--secondary);
+        }
+
+        @media (max-width: 768px) {
+            .profile-content {
+                grid-template-columns: 1fr;
+            }
+            .profile-header {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <a href="index.html" class="nav-brand"><img src="images/logo1.jpg" alt="8.8 Events" style="height: 65px; display: block;"></a>
+        <div class="nav-links">
+            <a href="search.html">Find Vendors</a>
+            <a href="categories.html">Categories</a>
+            <a href="how-it-works.html">How it Works</a>
+            <a href="register.html" class="btn btn-primary" style="color:white;">Join as Vendor</a>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container" style="padding-top: 3rem; padding-bottom: 5rem;">
+        <div class="profile-header">
+            <img src="https://images.unsplash.com/photo-1516450360452-9312f5e86fc7?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="DJ Flow" class="profile-image">
+            <div class="profile-info">
+                <h1>DJ Flow <span class="badge-verified">Verified</span></h1>
+                <p style="color: var(--text-secondary); font-size: 1.1rem; margin-bottom: 0.5rem;">DJ & Sound • Lagos</p>
+                <p>⭐ 4.9 (42 reviews) • 50+ Bookings Completed</p>
+            </div>
+        </div>
+
+        <div class="profile-content">
+            <div class="main-column">
+                <div class="content-card">
+                    <h2>About Me</h2>
+                    <p>With over 5 years of experience in creating unforgettable memories through music, DJ Flow specializes in weddings, corporate events, and large social gatherings. I bring the perfect blend of Afrobeats, Hip-hop, and classic hits to keep your dance floor packed all night long.</p>
+                </div>
+
+                <div class="content-card">
+                    <h2>Services & Pricing</h2>
+                    <div class="service-item">
+                        <div>
+                            <h4>Standard Wedding Package</h4>
+                            <p style="font-size: 0.875rem; color: var(--text-secondary);">6 hours of DJing, standard sound system, microphones</p>
+                        </div>
+                        <div class="price">₦150,000</div>
+                    </div>
+                    <div class="service-item">
+                        <div>
+                            <h4>Premium Corporate Package</h4>
+                            <p style="font-size: 0.875rem; color: var(--text-secondary);">8 hours, advanced PA system, lighting, background music curation</p>
+                        </div>
+                        <div class="price">₦250,000</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="side-column">
+                <div class="content-card" style="text-align: center;">
+                    <h2>Book this Vendor</h2>
+                    <p style="margin-bottom: 1.5rem; font-size: 0.875rem;">Request a customized quote or book directly.</p>
+                    <button class="btn btn-primary" style="width: 100%; margin-bottom: 1rem;">Request Quote</button>
+                    <p style="font-size: 0.75rem; color: var(--text-secondary);">Payment is protected by 8.8 Events</p>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div>
+                <a href="index.html" class="nav-brand"><img src="images/logo1.jpg" alt="8.8 Events" style="height: 65px; display: block;"></a>
+                <p style="margin-top: 1rem; color: rgba(255,255,255,0.7);">The trusted platform for event planning in Nigeria.</p>
+            </div>
+            <div>
+                <h4>Explore</h4>
+                <ul>
+                    <li><a href="search.html">Find Vendors</a></li>
+                    <li><a href="categories.html">Categories</a></li>
+                    <li><a href="how-it-works.html">How it Works</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Vendors</h4>
+                <ul>
+                    <li><a href="register.html">Join 8.8 Events</a></li>
+                    <li><a href="vendor-pricing.html">Pricing & Plans</a></li>
+                    <li><a href="faq.html">Vendor FAQ</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact Support</a></li>
+                    <li><a href="legal/terms.html">Terms of Service</a></li>
+                    <li><a href="legal/privacy.html">Privacy Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            &copy; 2026 8.8 Events. All rights reserved.
+        </div>
+    </footer>
+
+</body>
+</html>
