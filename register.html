@@ -82,15 +82,15 @@
 
                     <form>
                         <div class="form-row">
-                            <div class="form-group"><label>First Name</label><input type="text" placeholder="John"></div>
-                            <div class="form-group"><label>Last Name</label><input type="text" placeholder="Doe"></div>
+                            <div class="form-group"><label>First Name</label><input type="text" id="v-fname" placeholder="John"></div>
+                            <div class="form-group"><label>Last Name</label><input type="text" id="v-lname" placeholder="Doe"></div>
                         </div>
-                        <div class="form-group"><label>Email Address</label><input type="email" placeholder="vendor@example.com"></div>
-                        <div class="form-group"><label>Phone Number</label><input type="tel" placeholder="+234 800 000 0000"></div>
+                        <div class="form-group"><label>Email Address</label><input type="email" id="v-email" placeholder="vendor@example.com"></div>
+                        <div class="form-group"><label>Phone Number</label><input type="tel" id="v-phone" placeholder="+234 800 000 0000"></div>
                         <div class="form-row">
                             <div class="form-group">
                                 <label>State</label>
-                                <select>
+                                <select id="v-state">
                                     <option>Select State...</option>
                                     <option>Abia</option><option>Adamawa</option><option>Akwa Ibom</option>
                                     <option>Anambra</option><option>Bauchi</option><option>Bayelsa</option>
@@ -107,11 +107,11 @@
                                     <option>Zamfara</option>
                                 </select>
                             </div>
-                            <div class="form-group"><label>Local Government Area (LGA)</label><input type="text" placeholder="e.g. Ikeja"></div>
+                            <div class="form-group"><label>Local Government Area (LGA)</label><input type="text" id="v-lga" placeholder="e.g. Ikeja"></div>
                         </div>
                         <div class="form-group">
                             <label>Primary Service Category</label>
-                            <select>
+                            <select id="v-category">
                                 <option>Select a category...</option>
                                 <option>MC & Host</option>
                                 <option>DJ & Sound</option>
@@ -125,8 +125,8 @@
                                 <option>Interior Decorators & Fittings</option>
                             </select>
                         </div>
-                        <div class="form-group"><label>Password</label><input type="password" placeholder="Create a strong password"></div>
-                        <button type="button" class="btn-gold" style="width:100%;margin-top:0.5rem;">Continue to Business Details →</button>
+                        <div class="form-group"><label>Password</label><input type="password" id="v-password" placeholder="Create a strong password"></div>
+                        <button type="button" class="btn-gold" style="width:100%;margin-top:0.5rem;" onclick="registerVendor()">Complete Registration →</button>
                     </form>
 
                     <div class="switch-link">
@@ -153,6 +153,33 @@
         window.addEventListener('scroll', () => nb.classList.toggle('scrolled', window.scrollY > 60));
         document.getElementById('hamburger').addEventListener('click', () => document.getElementById('navLinks').classList.toggle('open'));
         document.querySelectorAll('.reveal').forEach(el => new IntersectionObserver(([e]) => { if(e.isIntersecting){e.target.classList.add('visible');}},{threshold:0.1}).observe(el));
+
+        function registerVendor() {
+            const vendorData = {
+                id: 'vendor_' + Date.now(),
+                firstName: document.getElementById('v-fname').value,
+                lastName: document.getElementById('v-lname').value,
+                email: document.getElementById('v-email').value,
+                phone: document.getElementById('v-phone').value,
+                state: document.getElementById('v-state').value,
+                lga: document.getElementById('v-lga').value,
+                category: document.getElementById('v-category').value,
+                isPaid: true // Default to paid for prototype testing
+            };
+
+            if (!vendorData.firstName || !vendorData.email || !vendorData.password) {
+                // simple validation skip for now, but in reality we'd check
+            }
+
+            let vendors = JSON.parse(localStorage.getItem('vendors') || '[]');
+            vendors.push(vendorData);
+            localStorage.setItem('vendors', JSON.stringify(vendors));
+
+            // Set current logged in user
+            localStorage.setItem('currentUser', JSON.stringify({ type: 'vendor', ...vendorData }));
+            
+            window.location.href = 'vendor-dashboard.html';
+        }
     </script>
 </body>
 </html>

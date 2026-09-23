@@ -44,15 +44,15 @@
 
                     <form>
                         <div class="form-row">
-                            <div class="form-group"><label>First Name</label><input type="text" placeholder="John"></div>
-                            <div class="form-group"><label>Last Name</label><input type="text" placeholder="Doe"></div>
+                            <div class="form-group"><label>First Name</label><input type="text" id="c-fname" placeholder="John"></div>
+                            <div class="form-group"><label>Last Name</label><input type="text" id="c-lname" placeholder="Doe"></div>
                         </div>
-                        <div class="form-group"><label>Email Address</label><input type="email" placeholder="you@example.com"></div>
-                        <div class="form-group"><label>Phone Number <span style="color:var(--white-40);">(Optional)</span></label><input type="tel" placeholder="+234 800 000 0000"></div>
+                        <div class="form-group"><label>Email Address</label><input type="email" id="c-email" placeholder="you@example.com"></div>
+                        <div class="form-group"><label>Phone Number <span style="color:var(--white-40);">(Optional)</span></label><input type="tel" id="c-phone" placeholder="+234 800 000 0000"></div>
                         <div class="form-row">
                             <div class="form-group">
                                 <label>State</label>
-                                <select>
+                                <select id="c-state">
                                     <option>Select State...</option>
                                     <option>Abia</option><option>Adamawa</option><option>Akwa Ibom</option>
                                     <option>Anambra</option><option>Bauchi</option><option>Bayelsa</option>
@@ -69,10 +69,10 @@
                                     <option>Zamfara</option>
                                 </select>
                             </div>
-                            <div class="form-group"><label>Local Government Area (LGA)</label><input type="text" placeholder="e.g. Ikeja"></div>
+                            <div class="form-group"><label>Local Government Area (LGA)</label><input type="text" id="c-lga" placeholder="e.g. Ikeja"></div>
                         </div>
-                        <div class="form-group"><label>Password</label><input type="password" placeholder="Create a strong password"></div>
-                        <button type="button" class="btn-gold" style="width:100%;margin-top:0.5rem;">Create My Account</button>
+                        <div class="form-group"><label>Password</label><input type="password" id="c-password" placeholder="Create a strong password"></div>
+                        <button type="button" class="btn-gold" style="width:100%;margin-top:0.5rem;" onclick="registerClient()">Create My Account</button>
                     </form>
 
                     <div class="switch-link">
@@ -100,6 +100,30 @@
         window.addEventListener('scroll', () => nb.classList.toggle('scrolled', window.scrollY > 60));
         document.getElementById('hamburger').addEventListener('click', () => document.getElementById('navLinks').classList.toggle('open'));
         document.querySelectorAll('.reveal').forEach(el => new IntersectionObserver(([e]) => { if(e.isIntersecting){e.target.classList.add('visible');}},{threshold:0.1}).observe(el));
+
+        function registerClient() {
+            const clientData = {
+                id: 'client_' + Date.now(),
+                firstName: document.getElementById('c-fname').value,
+                lastName: document.getElementById('c-lname').value,
+                email: document.getElementById('c-email').value,
+                phone: document.getElementById('c-phone').value,
+                state: document.getElementById('c-state').value,
+                lga: document.getElementById('c-lga').value,
+            };
+
+            if (!clientData.firstName || !clientData.email) {
+                // validation skip
+            }
+
+            let clients = JSON.parse(localStorage.getItem('clients') || '[]');
+            clients.push(clientData);
+            localStorage.setItem('clients', JSON.stringify(clients));
+
+            localStorage.setItem('currentUser', JSON.stringify({ type: 'client', ...clientData }));
+            
+            window.location.href = 'client-dashboard.html';
+        }
     </script>
 </body>
 </html>
